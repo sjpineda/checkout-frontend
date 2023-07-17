@@ -1,0 +1,53 @@
+{
+  "name": "authorize_dot_net",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
+  },
+  "dependencies": {
+    "@google-cloud/local-auth": "2.1.0",
+    "@hubspot/api-client": "^8.4.1",
+    "@hubspot/cli": "^4.1.6",
+    "@mdx-js/loader": "^2.2.1",
+    "@mdx-js/react": "^2.2.1",
+    "@next/bundle-analyzer": "^13.1.4",
+    "@next/font": "13.1.2",
+    "@next/mdx": "^13.1.4",
+    "authorizenet": "^1.0.8",
+    "axios": "^1.2.3",
+    "bootstrap": "^5.2.3",
+    "eslint": "8.32.0",
+    "eslint-config-next": "13.1.2",
+    "formik": "^2.2.9",
+    "fs": "^0.0.1-security",
+    "googleapis": "105",
+    "hubspot": "^2.3.14",
+    "jotform-react": "^1.0.4",
+    "js-base64": "^3.7.4",
+    "net": "^1.0.2",
+    "next": "13.1.2",
+    "papaparse": "^5.3.2",
+    "react": "18.2.0",
+    "react-bootstrap-date-picker": "^5.1.0",
+    "react-dom": "18.2.0",
+    "react-jotform-embed": "^1.1.2",
+    "react-loader-spinner": "^5.3.4",
+    "react-loading-overlay": "^1.0.1",
+    "react-select": "^5.7.0",
+    "react-toastify": "^9.0.8",
+    "tls": "^0.0.1",
+    "webpack": "^5.75.0",
+    "xlsx": "^0.18.5",
+    "yup": "^0.32.11"
+  }
+}
