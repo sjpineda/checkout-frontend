@@ -264,15 +264,24 @@ const normalizeData = (answers) => {
     ) {
       // let key = obj.text.split(' ').join('')
       // answers[key] = obj.hasOwnProperty('prettyFormat') ? obj.prettyFormat : obj.answer
-      const dictionaryName = propertiesDictionary[obj.name]
-      newObject[dictionaryName] = obj.hasOwnProperty('prettyFormat')
-        ? obj.prettyFormat
-        : obj.answer
-        ? obj.answer
-        : 0
+      if (obj.text === 'Address') {
+        let address = ''
+        for (const property in obj.answer) {
+          address += ` ${obj.answer[property]},`
+        }
+        address = address.replace(/,$/, '')
+        newObject[propertiesDictionary[obj.name]] = address
+      } else {
+        const dictionaryName = propertiesDictionary[obj.name]
+        newObject[dictionaryName] = obj.hasOwnProperty('prettyFormat')
+          ? obj.prettyFormat
+          : obj.answer
+          ? obj.answer
+          : 0
+      }
     }
   }
-  newObject['address'] = newObject.address?.replace(/<br>/g, '')
+  // newObject['address'] = newObject.address?.replace(/<br>/g, '')
   console.log('obj', newObject)
   for (let item in roomKeys) {
     if (newObject.hasOwnProperty(item)) {
@@ -297,7 +306,7 @@ const normalizeData = (answers) => {
     totalSuppliesBaseboards: 0,
     totalSuppliesCrownMolding: 0,
   }
-  if (newObject.whichAreas.includes('All areas')) {
+  if (newObject.whichAreas?.toString().includes('All areas')) {
     objectTotal = {
       totalWalls: totalRoomSupplies,
     }

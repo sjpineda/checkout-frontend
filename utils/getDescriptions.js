@@ -26,11 +26,24 @@ export const getDescriptions = (newObject) => {
 }
 
 export const getJobDescription = (newObject) => {
-  let jobDescription = 'Painting service for walls ceilings'
-  jobDescription += ' ' + newObject.Paintthefollowingtrim
-  jobDescription += `  in ${newObject.bedrooms} bedrooms  ${newObject.bathrooms}  bathrooms ${newObject.livingRooms} 
-  living rooms ${newObject.kitchens} kitchens ${newObject.familyRooms} family rooms ${newObject.diningRooms} 
-  dinning rooms ${newObject.foyers} foyers ${newObject.offices} offices ${newObject.hallways} hallways ${newObject.stairwells} stairwells ${newObject.basement} basement. 
-  in ${newObject.numberOfDoorWithFrames} doors ${newObject.numberOfClosets} closets.`
+  let jobDescription = 'Painting service for walls'
+  if (newObject.paintCeilings.toString() === 'Yes') {
+    jobDescription += ', and ceilings'
+  }
+  if (newObject.trimPaintedBaseboardsCM === 'Baseboards') {
+    jobDescription += ', baseboards,'
+  }
+  console.log('nt]ot na', jobDescription)
+  const whatpaint = newObject.whatToPaint.toLowerCase().replace(/;/g, ',')
+  console.log('whatpaint', whatpaint)
+  jobDescription += ` ${whatpaint}`
+  jobDescription += ' according to the instructions provided by the client'
+  // jobDescription += ' ' + newObject.Paintthefollowingtrim
+  // jobDescription += `  in ${newObject.bedrooms} bedrooms  ${newObject.bathrooms}  bathrooms ${newObject.livingRooms}
+  // living rooms ${newObject.kitchens} kitchens ${newObject.familyRooms} family rooms ${newObject.diningRooms}
+  // dinning rooms ${newObject.foyers} foyers ${newObject.offices} offices ${newObject.hallways} hallways ${newObject.stairwells} stairwells ${newObject.basement} basement.
+  // in ${newObject.numberOfDoorWithFrames} doors ${newObject.numberOfClosets} closets.`
+  console.log('jobDescri', jobDescription)
+
   return jobDescription
 }

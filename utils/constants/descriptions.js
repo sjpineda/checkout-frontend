@@ -1,11 +1,10 @@
 export function getConstants(newObject, totalRoomSupplies, totalCrownMolding) {
-  let serViceIncludes = 'This service includes: - '
+  let serViceIncludes = '\nThis service includes:'
   if (newObject.propertyIs.includes('Furnished')) {
     serViceIncludes +=
-      'Move furniture away from application areas. - Protecting and covering of existing surface(s),' +
-      ' floors, and furniture with drop cloths and plastic sheets where necessary. '
+      '\n-Move furniture away from application areas.\n-Protecting and covering of existing surface(s), floors, and furniture with drop cloths and plastic sheets where necessary.'
     if (totalRoomSupplies > 0) {
-      serViceIncludes += ' - Walls  - Ceiling '
+      serViceIncludes += '\n-Walls -Ceiling '
     }
     if (
       totalRoomSupplies > 0 &&
@@ -14,80 +13,84 @@ export function getConstants(newObject, totalRoomSupplies, totalCrownMolding) {
       newObject.numberOfClosets !== '0'
     ) {
       serViceIncludes +=
-        ' - Trim, surface preparation for paint (Repairing and sanding localized areas - ' +
-        'Cracks and nail holes will be filled where necessary) '
+        '-Trim, surface preparation for paint (Repairing and sanding localized areas Cracks and nail holes will be filled where necessary) '
     }
   }
 
-  let considering = ' - Considering: '
+  let considering = '\n-Considering: '
   if (newObject.conditionOfTheWalls?.toString().includes('Good')) {
-    considering += `Walls are ${commonStrings.goodCondition}}`
+    considering += `Walls ${commonStrings.goodCondition}`
   }
   if (newObject.conditionOfTheWalls?.toString().includes('Minimum')) {
-    considering += `Walls are ${commonStrings.minimumCondition}}`
+    considering += `Walls ${commonStrings.minimumCondition}`
   }
   if (newObject.conditionOfTheWalls?.toString().includes('Damaged')) {
-    considering += `Walls are ${commonStrings.damagedCondition}}`
+    considering += `Walls ${commonStrings.damagedCondition}`
   }
 
   if (newObject.conditionOfTheCeilings.toString().includes('Good')) {
-    considering += `Ceiling ${commonStrings.goodCondition}}`
+    considering += ` - Ceiling ${commonStrings.goodCondition}`
   }
   if (newObject.conditionOfTheCeilings.toString().includes('Minimum')) {
-    considering += `Ceiling ${commonStrings.minimumCondition}}`
+    considering += ` - Ceiling ${commonStrings.minimumCondition}`
   }
   if (newObject.conditionOfTheCeilings.toString().includes('Damaged')) {
-    considering += `Ceiling ${commonStrings.damagedCondition}}`
+    considering += ` - Ceiling ${commonStrings.damagedCondition}`
   }
   if (newObject.conditionOfTheTrim.toString().includes('Good')) {
-    considering += `Trim ${commonStrings.goodCondition}}`
+    considering += ` - Trim ${commonStrings.goodCondition}`
   }
   if (newObject.conditionOfTheTrim.toString().includes('Minimum')) {
-    considering += `Trim ${commonStrings.minimumCondition}}`
+    considering += ` - Trim ${commonStrings.minimumCondition}`
   }
   if (newObject.conditionOfTheTrim.toString().includes('Damaged')) {
-    considering += `Trim ${commonStrings.damagedCondition}}`
+    considering += ` - Trim ${commonStrings.damagedCondition}`
   }
 
-  let paintingService = ` - Painting service for: Walls in areas
-   ${Number(newObject.bedrooms) !== 0 ? 'Bedrooms' : ''} ${
-    Number(newObject.bathrooms) !== 0 ? 'Bathrooms' : ''
-  } ${Number(newObject.livingRooms) !== 0 ? 'Living Rooms' : ''} ${
-    Number(newObject.diningRooms) !== 0 ? 'Dining Rooms' : ''
-  } ${Number(newObject.kitchens) !== 0 ? 'Kitchens' : ''} ${
-    Number(newObject.hallways) !== 0 ? 'Hallways' : ''
-  } ${Number(newObject.stairwells) !== 0 ? 'Stairwells' : ''} ${
-    Number(newObject.foyers) !== 0 ? 'Foyers' : ''
-  } ${Number(newObject.offices) !== 0 ? 'Offices' : ''} ${
-    Number(newObject.familyRooms) !== 0 ? 'Family Rooms' : ''
-  } ${Number(newObject.basement) !== 0 ? 'Basement' : ''}
+  let paintingService = `\n-Painting service for: \nWalls in the following areas:  ${
+    Number(newObject.bedrooms) !== 0 ? `${newObject.bedrooms} Bedrooms` : ''
+  } ${Number(newObject.bathrooms) !== 0 ? `${newObject.bathrooms} Bathrooms` : ''} ${
+    Number(newObject.livingRooms) !== 0 ? `${newObject.livingRooms} Living Rooms` : ''
+  } ${Number(newObject.diningRooms) !== 0 ? ` ${newObject.diningRooms} Dining Rooms` : ''} ${
+    Number(newObject.kitchens) !== 0 ? `${newObject.kitchens} Kitchens` : ''
+  } ${Number(newObject.hallways) !== 0 ? `${newObject.hallways} Hallways` : ''} ${
+    Number(newObject.stairwells) !== 0 ? ` ${newObject.stairwells} Stairwells` : ''
+  } ${Number(newObject.foyers) !== 0 ? ` ${newObject.foyers} Foyers` : ''} ${
+    Number(newObject.offices) !== 0 ? `${newObject.offices} Offices` : ''
+  } ${Number(newObject.familyRooms) !== 0 ? `${newObject.familyRooms} Family Rooms` : ''} ${
+    Number(newObject.basement) !== 0 ? `${newObject.basement} Basement` : ''
+  }
     `
 
-  let ceilingService = `Celing in areas including 
-  ${Number(newObject.bedrooms) !== 0 ? 'Bedrooms' : ''} ${
-    Number(newObject.bathrooms) !== 0 ? 'Bathrooms' : ''
-  } ${Number(newObject.livingRooms) !== 0 ? 'Living Rooms' : ''} ${
-    Number(newObject.diningRooms) !== 0 ? 'Dining Rooms' : ''
-  } ${Number(newObject.kitchens) !== 0 ? 'Kitchens' : ''} ${
-    Number(newObject.hallways) !== 0 ? 'Hallways' : ''
-  } ${Number(newObject.stairwells) !== 0 ? 'Stairwells' : ''} ${
-    Number(newObject.foyers) !== 0 ? 'Foyers' : ''
-  } ${Number(newObject.offices) !== 0 ? 'Offices' : ''} ${
-    Number(newObject.familyRooms) !== 0 ? 'Family Rooms' : ''
-  } ${Number(newObject.basement) !== 0 ? 'Basement' : ''}`
+  let ceilingService = `-Ceiling in areas including   ${
+    Number(newObject.bedrooms) !== 0 ? `${newObject.bedrooms} Bedrooms` : ''
+  } ${Number(newObject.bathrooms) !== 0 ? `${newObject.bathrooms} Bathrooms` : ''} ${
+    Number(newObject.livingRooms) !== 0 ? `${newObject.livingRooms} Living Rooms` : ''
+  } ${Number(newObject.diningRooms) !== 0 ? ` ${newObject.diningRooms} Dining Rooms` : ''} ${
+    Number(newObject.kitchens) !== 0 ? `${newObject.kitchens} Kitchens` : ''
+  } ${Number(newObject.hallways) !== 0 ? `${newObject.hallways} Hallways` : ''} ${
+    Number(newObject.stairwells) !== 0 ? ` ${newObject.stairwells} Stairwells` : ''
+  } ${Number(newObject.foyers) !== 0 ? ` ${newObject.foyers} Foyers` : ''} ${
+    Number(newObject.offices) !== 0 ? `${newObject.offices} Offices` : ''
+  } ${Number(newObject.familyRooms) !== 0 ? `${newObject.familyRooms} Family Rooms` : ''} ${
+    Number(newObject.basement) !== 0 ? `${newObject.basement} Basement` : ''
+  }
+    `
 
-  let baseboardService = `Baseboard in areas including 
-${Number(newObject.bedrooms) !== 0 ? 'Bedrooms' : ''} ${
-    Number(newObject.bathrooms) !== 0 ? 'Bathrooms' : ''
-  } ${Number(newObject.livingRooms) !== 0 ? 'Living Rooms' : ''} ${
-    Number(newObject.diningRooms) !== 0 ? 'Dining Rooms' : ''
-  } ${Number(newObject.kitchens) !== 0 ? 'Kitchens' : ''} ${
-    Number(newObject.hallways) !== 0 ? 'Hallways' : ''
-  } ${Number(newObject.stairwells) !== 0 ? 'Stairwells' : ''} ${
-    Number(newObject.foyers) !== 0 ? 'Foyers' : ''
-  } ${Number(newObject.offices) !== 0 ? 'Offices' : ''} ${
-    Number(newObject.familyRooms) !== 0 ? 'Family Rooms' : ''
-  } ${Number(newObject.basement) !== 0 ? 'Basement' : ''}`
+  let baseboardService = `-Baseboard in areas including ${
+    Number(newObject.bedrooms) !== 0 ? `${newObject.bedrooms} Bedrooms` : ''
+  } ${Number(newObject.bathrooms) !== 0 ? `${newObject.bathrooms} Bathrooms` : ''} ${
+    Number(newObject.livingRooms) !== 0 ? `${newObject.livingRooms} Living Rooms` : ''
+  } ${Number(newObject.diningRooms) !== 0 ? ` ${newObject.diningRooms} Dining Rooms` : ''} ${
+    Number(newObject.kitchens) !== 0 ? `${newObject.kitchens} Kitchens` : ''
+  } ${Number(newObject.hallways) !== 0 ? `${newObject.hallways} Hallways` : ''} ${
+    Number(newObject.stairwells) !== 0 ? ` ${newObject.stairwells} Stairwells` : ''
+  } ${Number(newObject.foyers) !== 0 ? ` ${newObject.foyers} Foyers` : ''} ${
+    Number(newObject.offices) !== 0 ? `${newObject.offices} Offices` : ''
+  } ${Number(newObject.familyRooms) !== 0 ? `${newObject.familyRooms} Family Rooms` : ''} ${
+    Number(newObject.basement) !== 0 ? `${newObject.basement} Basement` : ''
+  }
+    `
 
   let crownMoldingService =
     totalCrownMolding > 0
@@ -107,34 +110,36 @@ ${Number(newObject.bedrooms) !== 0 ? 'Bedrooms' : ''} ${
 
   let noPaint = ''
   if (totalRoomSupplies === 0) {
-    noPaint = ' - No Walls - No Ceiling - No Baseboards'
+    noPaint = '\n- No Walls - No Ceiling - No Baseboards'
   }
   if (totalCrownMolding === 0) {
-    noPaint = ' - No crown molding required'
+    noPaint = '\n- No crown molding required'
   }
-  let doorWithFrame = Number(newObject.doorsWithFrame) > 0 ? ` - Doors with frames` : ' NO DOORS'
+  let doorWithFrame =
+    Number(newObject.numberOfDoorWithFrames) > 0
+      ? `\n- ${newObject.numberOfDoorWithFrames} Doors with frames`
+      : '\n- NO DOORS'
   let windowWithFrame =
-    Number(newObject.numberOfWindowFrames) > 0 ? ` - Windows with frames` : 'NO WINDOWS'
-  let closets = Number(newObject.numberOfClosets) > 0 ? ` - Closets` : 'NO CLOSETS'
+    Number(newObject.numberOfWindowFrames) > 0
+      ? ` - ${newObject.numberOfWindowFrames} Windows with frames`
+      : 'NO WINDOWS'
+  let closets =
+    Number(newObject.numberOfClosets) > 0 ? ` - ${newObject.numberOfClosets} Closets` : 'NO CLOSETS'
 
-  let notesByClients = ' * Notes (info provided by client): '
+  let notesByClients = '\n* Notes (info provided by client): '
   if (newObject.currentWallFinish.includes('Matte')) {
-    notesByClients += 'Matte'
+    notesByClients += '\nMatte'
   } else {
-    notesByClients += 'Gloss'
+    notesByClients += '\nGloss '
   }
-  notesByClients += 'and new finish is'
+  notesByClients += 'and new finish is '
   if (newObject.desiredWallFinish.includes('Matte')) {
     notesByClients += 'Matte'
   } else {
     notesByClients += 'Gloss'
   }
   let approx = ''
-  approx += `Approx ${newObject.numberKeepColorRooms} areas will have 
-  the same or similar colors or a similar shade of color for walls.
-   Approx ${newObject.numberRoomsLightToDark} areas will change to collors of the wall
-   to a much darker shade or color. Approx ${newObject.numberRoomsDarkToLight}  areas will change the colors of the walls 
-   to a much lighter shade or color
+  notesByClients += ` Approx ${newObject.numberKeepColorRooms} areas will have the same or similar colors or a similar shade of color for walls.   Approx ${newObject.numberRoomsLightToDark} areas will change to collors of the wall to a much darker shade or color. Approx ${newObject.numberRoomsDarkToLight}  areas will change the colors of the walls to a much lighter shade or color
   `
 
   if (newObject.changeTrimColor.toString().includes('Keep the same')) {
@@ -144,16 +149,26 @@ ${Number(newObject.bedrooms) !== 0 ? 'Bedrooms' : ''} ${
      change the trim to a darker color. Approx ${newObject.numberRoomsTrimDarkToLight} areas will change the trim to a lighter color`
   }
 
-  let propertyCondition = ` This property is ${newObject.propertyIs} ${newObject.furnishedRange}
+  let propertyCondition = `\nThis property is ${newObject.propertyIs} ${newObject.furnishedRange}
    Paint: ${newObject.brandOfPaint}`
 
   if (newObject.paintProvided.includes('Yes')) {
-    propertyCondition += ' - Paint and Supplies included'
+    propertyCondition += '\n- Paint and Supplies included'
   } else {
-    propertyCondition += ' - Paint Provided by Client'
+    propertyCondition += '\n- Paint Provided by Client'
   }
-  let propertyDescription = serViceIncludes + noPaint + doorWithFrame + windowWithFrame + closets
-  let bottomDescription = notesByClients + approx + propertyCondition
+  let propertyDescription =
+    serViceIncludes +
+    considering +
+    paintingService +
+    ceilingService +
+    baseboardService +
+    crownMoldingService +
+    noPaint +
+    doorWithFrame +
+    windowWithFrame +
+    closets
+  let bottomDescription = propertyDescription + notesByClients + approx + propertyCondition
   return {
     propertyDescription,
     bottomDescription,

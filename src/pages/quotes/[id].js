@@ -12,7 +12,13 @@ function Quotes() {
   const [loading, setLoading] = useState(true)
   const [quotes, setQuotes] = useState([])
   const [quotesData, setQuotesData] = useState()
-
+  const str = 'Line 1\nLine 2\nLine 3'
+  const formattedStr = quotesData?.finalResult?.bottomDescription.split('\n').map((line, index) => (
+    <div style={{ marginTop: '16px' }} key={index}>
+      {line}
+      <br />
+    </div>
+  ))
   useEffect(() => {
     if (id) {
       fetchExcelData()
@@ -65,6 +71,20 @@ function Quotes() {
       overflowY: 'scroll',
       padding: '15px 0',
     },
+    signatureContainer: {
+      borderBottom: '1px solid #000',
+      padding: '10px',
+      width: '300px',
+    },
+    signature: {
+      border: '1px dashed #000',
+      height: '50px',
+      marginBottom: '10px',
+    },
+    date: {
+      marginBottom: '10px',
+    },
+    printedName: {},
   }
 
   const borderCardStyle = {
@@ -95,15 +115,15 @@ function Quotes() {
           </div>
           <div className="container-lg pt-5 mt-5">
             <div className="row gx-lg-5 flex-md-reverse">
-              <div className="col-md-6 col-12 mb-5">
-                <h5 className="mb-4">Checkout</h5>
-                <PaymentCard
-                  amount={quotesData?.totalCost / 2}
-                  name={quotesData?.finalResult?.userInfo?.name}
-                  phoneNumber={quotesData?.finalResult?.userInfo?.phoneNumber}
-                />
-              </div>
-              <div className="col-md-6 col-12">
+              {/*<div className="col-md-6 col-12 mb-5">*/}
+              {/*  <h5 className="mb-4">Checkout</h5>*/}
+              {/*  <PaymentCard*/}
+              {/*    amount={quotesData?.totalCost / 2}*/}
+              {/*    name={quotesData?.finalResult?.userInfo?.name}*/}
+              {/*    phoneNumber={quotesData?.finalResult?.userInfo?.phoneNumber}*/}
+              {/*  />*/}
+              {/*</div>*/}
+              <div className="col-md-12 col-12">
                 <div style={style.rightContent}>
                   <div style={style.container}>
                     <img src="/logo.jpeg" className="mb-3" style={style.imageStyle} />
@@ -161,20 +181,21 @@ function Quotes() {
                           <strong>Address</strong> {quotesData?.finalResult?.userInfo?.address}
                         </p>
                         <div className="d-grid gap-2">
-                          <h3 style={borderCardStyle.cardTitle}>Description</h3>
-                          <p style={borderCardStyle.desc}>
-                            {quotesData?.finalResult?.jobDescription}
-                          </p>
-                        </div>
-                        <div className="d-grid gap-2">
                           <h3 style={borderCardStyle.cardTitle}>Property Description</h3>
                           <p style={borderCardStyle.desc}>
                             {quotesData?.finalResult?.propertyDescription}
                           </p>
                         </div>
-                        <i style={borderCardStyle.desc}>
-                          <strong>"Note</strong> {quotesData?.finalResult?.bottomDescription}
-                        </i>
+                        <div className="d-grid gap-2">
+                          <h3 style={borderCardStyle.cardTitle}>Job Description</h3>
+                          <p style={borderCardStyle.desc}>
+                            {quotesData?.finalResult?.jobDescription}
+                          </p>
+                        </div>
+                        {/*<i style={borderCardStyle.desc}>*/}
+                        {/*  /!*<strong>"Note</strong> {quotesData?.finalResult?.bottomDescription}*!/*/}
+                        {/*  {formattedStr}*/}
+                        {/*</i>*/}
                       </div>
                     </div>
                   </div>
@@ -216,6 +237,10 @@ function Quotes() {
                           </tr>
                         </tbody>
                       </table>
+                      <i style={borderCardStyle.desc}>
+                        {/*<strong>"Note</strong> {quotesData?.finalResult?.bottomDescription}*/}
+                        {formattedStr}
+                      </i>
                       <table style={tableCardStyle.table}>
                         <thead>
                           <tr>
@@ -245,18 +270,58 @@ function Quotes() {
                       <table style={tableCardStyle.table}>
                         <thead>
                           <tr>
+                            <th style={tableCardStyle.tableHead}>Other Fees</th>
+                            <th className="text-right" style={tableCardStyle.tableHead}></th>
+                            <th className="text-right" style={tableCardStyle.tableHead}></th>
+                            <th className="text-right" style={tableCardStyle.tableHead}></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr style={tableCardStyle.tableTr}>
+                            <td style={tableCardStyle.tableTd}>
+                              <div className="grid gap-2">
+                                <p>7% WBE</p>
+                              </div>
+                            </td>
+                            <td style={tableCardStyle.tableTd} className="text-right"></td>
+                            <td style={tableCardStyle.tableTd} className="text-right"></td>
+                            <td style={tableCardStyle.tableTd} className="text-right">
+                              <div className="grid gap-1">
+                                <p>${quotesData?.totalCost * 0.07}</p>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <table style={tableCardStyle.table}>
+                        <thead>
+                          <tr>
                             <th style={tableCardStyle.tableHead}></th>
                             <th className="text-right" style={tableCardStyle.tableHead}></th>
+                            <th style={tableCardStyle.tableHead}>Total</th>
                             <th className="text-right" style={tableCardStyle.tableHead}>
-                              Total
-                              <p className="text-secondary">One time 50% of total</p>
-                            </th>
-                            <th className="text-right" style={tableCardStyle.tableHead}>
-                              ${quotesData?.totalCost / 2}{' '}
+                              {`                ${
+                                quotesData?.totalCost - quotesData?.totalCost * 0.07
+                              }`}
                             </th>
                           </tr>
                         </thead>
                       </table>
+                      <h2 style={tableCardStyle.heading}>Signature</h2>
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <div>
+                          <div style={style.signatureContainer}></div>
+                          Signature
+                        </div>
+                        <div>
+                          <div style={style.signatureContainer}></div>
+                          Date
+                        </div>
+                      </div>
+                      <div style={{ marginTop: '32px' }}>
+                        <div style={style.signatureContainer}></div>
+                        Printed Name
+                      </div>
                     </div>
                   </div>
                 </div>

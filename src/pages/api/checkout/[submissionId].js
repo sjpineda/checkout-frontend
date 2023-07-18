@@ -10,6 +10,7 @@ import { repairingCeiling } from '../../../../utils/hours/repairingCeiling'
 import { repairingTrim } from '../../../../utils/hours/repairingTrim'
 import { getDescriptions, getJobDescription } from '../../../../utils/getDescriptions'
 import { getConstants } from '../../../../utils/constants/descriptions'
+import { getPropertyDescriptions } from '../../../../utils/getPropertyDescription'
 const apiKey = process.env.JOTFORM_API_KEY
 
 export default async function getCheckout(req, res) {
@@ -33,6 +34,8 @@ export default async function getCheckout(req, res) {
     totalRoomSupplies,
     totalCrownMolding
   )
+  const propertyDescriptions = getPropertyDescriptions(newObject)
+  console.log('propertyDescriptions', propertyDescriptions)
   const jobDescription = getJobDescription(newObject)
   const coveringFurnitureCost = coveringFurniture(totalRoomSupplies, newObject)
   // console.log('coveringFurnitureCost', coveringFurnitureCost)
@@ -115,7 +118,7 @@ export default async function getCheckout(req, res) {
         year: 'numeric',
       }),
     },
-    propertyDescription: propertyDescription,
+    propertyDescription: propertyDescriptions,
     jobDescription: jobDescription,
     bottomDescription: bottomDescription,
   }
