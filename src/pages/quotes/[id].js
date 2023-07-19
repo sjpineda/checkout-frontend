@@ -14,7 +14,7 @@ function Quotes() {
   const [quotesData, setQuotesData] = useState()
   const str = 'Line 1\nLine 2\nLine 3'
   const formattedStr = quotesData?.finalResult?.bottomDescription.split('\n').map((line, index) => (
-    <div style={{ marginTop: '16px' }} key={index}>
+    <div style={{ marginTop: '16px', fontSize: '16px' }} key={index}>
       {line}
       <br />
     </div>
@@ -58,10 +58,10 @@ function Quotes() {
     },
     container: { maxWidth: '80%', margin: 'auto' },
     prtBanner: { background: '#FE346E', padding: '20px 0px', color: '#fff' },
-    prtBannerTitle: { fontSize: '16px', fontWeight: '700', margin: '0 0 10px' },
-    prtBannerStrong: { fontSize: '9px', margin: '0 0  1px', fontWeight: '500' },
+    prtBannerTitle: { fontSize: '24px', fontWeight: '700', margin: '0 0 10px' },
+    prtBannerStrong: { fontSize: '16px', margin: '0 0  1px', fontWeight: '500' },
     prtBannerText: {
-      fontSize: '9px',
+      fontSize: '14px',
       marginBottom: '1px',
       color: 'rgba(255, 255, 255, .8)',
     },
@@ -89,16 +89,16 @@ function Quotes() {
 
   const borderCardStyle = {
     card: { border: '1px solid #ccc', padding: '20px', margin: '20px 0' },
-    cardTitle: { fontSize: '11px', fontWeight: '700', margin: '0' },
-    desc: { fontSize: '10px' },
+    cardTitle: { fontSize: '16px', fontWeight: '700', margin: '0' },
+    desc: { fontSize: '14px' },
   }
 
   const tableCardStyle = {
     heading: { fontSize: '16px', fontWeight: '700', margin: '25px 0 15px' },
     table: { width: '100%' },
-    tableHead: { fontSize: '11px', padding: '10px 0' },
+    tableHead: { fontSize: '14px', padding: '10px 0' },
     tableTr: { borderTop: '1px solid #f2f2f2', verticalAlign: 'baseline' },
-    tableTd: { padding: '12px 0', fontSize: '10px', color: '#555555' },
+    tableTd: { padding: '1px 0', fontSize: '14px', color: '#555555' },
     tableList: { margin: '5px 0', padding: '0 0 0 10px' },
   }
 
@@ -134,7 +134,7 @@ function Quotes() {
                         {quotesData?.finalResult?.userInfo?.name}
                       </h2>
                       <div className="row">
-                        <div className="col-lg-8 col-8 mb-3">
+                        <div className="col-lg-8 col-md-2 col-8 mb-3">
                           <p style={style.prtBannerStrong}>
                             <strong>{quotesData?.finalResult?.userInfo?.name}</strong>
                           </p>
@@ -145,7 +145,7 @@ function Quotes() {
                             {quotesData?.finalResult?.userInfo?.phoneNumber}
                           </p>
                         </div>
-                        <div className="col-lg-3 col-6 mb-3">
+                        <div className="col-lg-3 col-md-10 mb-3">
                           <div className="text-right">
                             <p style={style.prtBannerStrong} className="text-nowrap">
                               <strong>Reference: {id}</strong>
@@ -237,10 +237,10 @@ function Quotes() {
                           </tr>
                         </tbody>
                       </table>
-                      <i style={borderCardStyle.desc}>
+                      <p style={borderCardStyle.desc}>
                         {/*<strong>"Note</strong> {quotesData?.finalResult?.bottomDescription}*/}
                         {formattedStr}
-                      </i>
+                      </p>
                       <table style={tableCardStyle.table}>
                         <thead>
                           <tr>
