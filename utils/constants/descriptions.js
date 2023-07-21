@@ -1,4 +1,4 @@
-export function getConstants(newObject, totalRoomSupplies, totalCrownMolding) {
+export function getConstants(newObject, totalRoomSupplies, totalCrownMolding, objectTotal) {
   let serViceIncludes = '\nThis service includes:'
   if (newObject.propertyIs.includes('Furnished')) {
     serViceIncludes +=
@@ -7,10 +7,10 @@ export function getConstants(newObject, totalRoomSupplies, totalCrownMolding) {
       serViceIncludes += '\n-Walls -Ceiling '
     }
     if (
-      totalRoomSupplies > 0 &&
+      objectTotal.totalCrownMolding > 0 &&
+      objectTotal.totalBaseboards > 0 &&
       Number(newObject.numberOfWindowFrames) > 0 &&
-      newObject.numberOfWindowFrames !== '' &&
-      newObject.numberOfClosets !== '0'
+      Number(newObject.numberOfClosets) > 0
     ) {
       serViceIncludes +=
         '-Trim, surface preparation for paint (Repairing and sanding localized areas Cracks and nail holes will be filled where necessary) '
@@ -61,36 +61,146 @@ export function getConstants(newObject, totalRoomSupplies, totalCrownMolding) {
     Number(newObject.basement) !== 0 ? `${newObject.basement} Basement` : ''
   }
     `
-
-  let ceilingService = `-Ceiling in areas including   ${
-    Number(newObject.bedrooms) !== 0 ? `${newObject.bedrooms} Bedrooms` : ''
-  } ${Number(newObject.bathrooms) !== 0 ? `${newObject.bathrooms} Bathrooms` : ''} ${
-    Number(newObject.livingRooms) !== 0 ? `${newObject.livingRooms} Living Rooms` : ''
-  } ${Number(newObject.diningRooms) !== 0 ? ` ${newObject.diningRooms} Dining Rooms` : ''} ${
-    Number(newObject.kitchens) !== 0 ? `${newObject.kitchens} Kitchens` : ''
-  } ${Number(newObject.hallways) !== 0 ? `${newObject.hallways} Hallways` : ''} ${
-    Number(newObject.stairwells) !== 0 ? ` ${newObject.stairwells} Stairwells` : ''
-  } ${Number(newObject.foyers) !== 0 ? ` ${newObject.foyers} Foyers` : ''} ${
-    Number(newObject.offices) !== 0 ? `${newObject.offices} Offices` : ''
-  } ${Number(newObject.familyRooms) !== 0 ? `${newObject.familyRooms} Family Rooms` : ''} ${
-    Number(newObject.basement) !== 0 ? `${newObject.basement} Basement` : ''
-  }
+  let ceilingService = ''
+  if (newObject.whichAreasCeilings.toString() === 'All areas') {
+    ceilingService =
+      objectTotal.totalCeilings > 0
+        ? `-Ceiling in areas including   ${
+            Number(newObject.bedrooms) !== 0 ? `${newObject.bedrooms} Bedrooms` : ''
+          } ${Number(newObject.bathrooms) !== 0 ? `${newObject.bathrooms} Bathrooms` : ''} ${
+            Number(newObject.livingRooms) !== 0 ? `${newObject.livingRooms} Living Rooms` : ''
+          } ${
+            Number(newObject.diningRooms) !== 0 ? ` ${newObject.diningRooms} Dining Rooms` : ''
+          } ${Number(newObject.kitchens) !== 0 ? `${newObject.kitchens} Kitchens` : ''} ${
+            Number(newObject.hallways) !== 0 ? `${newObject.hallways} Hallways` : ''
+          } ${Number(newObject.stairwells) !== 0 ? ` ${newObject.stairwells} Stairwells` : ''} ${
+            Number(newObject.foyers) !== 0 ? ` ${newObject.foyers} Foyers` : ''
+          } ${Number(newObject.offices) !== 0 ? `${newObject.offices} Offices` : ''} ${
+            Number(newObject.familyRooms) !== 0 ? `${newObject.familyRooms} Family Rooms` : ''
+          } ${Number(newObject.basement) !== 0 ? `${newObject.basement} Basement` : ''}
     `
-
-  let baseboardService = `-Baseboard in areas including ${
-    Number(newObject.bedrooms) !== 0 ? `${newObject.bedrooms} Bedrooms` : ''
-  } ${Number(newObject.bathrooms) !== 0 ? `${newObject.bathrooms} Bathrooms` : ''} ${
-    Number(newObject.livingRooms) !== 0 ? `${newObject.livingRooms} Living Rooms` : ''
-  } ${Number(newObject.diningRooms) !== 0 ? ` ${newObject.diningRooms} Dining Rooms` : ''} ${
-    Number(newObject.kitchens) !== 0 ? `${newObject.kitchens} Kitchens` : ''
-  } ${Number(newObject.hallways) !== 0 ? `${newObject.hallways} Hallways` : ''} ${
-    Number(newObject.stairwells) !== 0 ? ` ${newObject.stairwells} Stairwells` : ''
-  } ${Number(newObject.foyers) !== 0 ? ` ${newObject.foyers} Foyers` : ''} ${
-    Number(newObject.offices) !== 0 ? `${newObject.offices} Offices` : ''
-  } ${Number(newObject.familyRooms) !== 0 ? `${newObject.familyRooms} Family Rooms` : ''} ${
-    Number(newObject.basement) !== 0 ? `${newObject.basement} Basement` : ''
-  }
+        : ''
+  } else {
+    ceilingService =
+      objectTotal.totalCeilings > 0
+        ? `-Ceiling in areas including   ${
+            newObject.selectAreasCeilings.toString().includes('Bedrooms')
+              ? `${newObject.bedrooms} Bedrooms`
+              : ''
+          } ${
+            newObject.selectAreasCeilings.toString().includes('Bathrooms')
+              ? `${newObject.bathrooms} Bathrooms`
+              : ''
+          } ${
+            newObject.selectAreasCeilings.toString().includes('Living Rooms')
+              ? `${newObject.livingRooms} Living Rooms`
+              : ''
+          } ${
+            newObject.selectAreasCeilings.toString().includes('Dining Rooms')
+              ? ` ${newObject.diningRooms} Dining Rooms`
+              : ''
+          } ${
+            newObject.selectAreasCeilings.toString().includes('Kitchens')
+              ? `${newObject.kitchens} Kitchens`
+              : ''
+          } ${
+            newObject.selectAreasCeilings.toString().includes('Hallways')
+              ? `${newObject.hallways} Hallways`
+              : ''
+          } ${
+            newObject.selectAreasCeilings.toString().includes('Stairwells')
+              ? ` ${newObject.stairwells} Stairwells`
+              : ''
+          } ${
+            newObject.selectAreasCeilings.toString().includes('Foyers')
+              ? ` ${newObject.foyers} Foyers`
+              : ''
+          } ${
+            newObject.selectAreasCeilings.toString().includes('Offices')
+              ? `${newObject.offices} Offices`
+              : ''
+          } ${
+            newObject.selectAreasCeilings.toString().includes('Family Rooms')
+              ? `${newObject.familyRooms} Family Rooms`
+              : ''
+          } ${
+            newObject.selectAreasCeilings.toString().includes('Basement')
+              ? `${newObject.basement} Basement`
+              : ''
+          }
     `
+        : ''
+  }
+  let baseboardService = ''
+  if (newObject.whichAreasBaseboards.toString() === 'All areas') {
+    baseboardService =
+      objectTotal.totalBaseboards > 0
+        ? `-Baseboard in the following areas ${
+            Number(newObject.bedrooms) !== 0 ? `${newObject.bedrooms} Bedrooms` : ''
+          } ${Number(newObject.bathrooms) !== 0 ? `${newObject.bathrooms} Bathrooms` : ''} ${
+            Number(newObject.livingRooms) !== 0 ? `${newObject.livingRooms} Living Rooms` : ''
+          } ${
+            Number(newObject.diningRooms) !== 0 ? ` ${newObject.diningRooms} Dining Rooms` : ''
+          } ${Number(newObject.kitchens) !== 0 ? `${newObject.kitchens} Kitchens` : ''} ${
+            Number(newObject.hallways) !== 0 ? `${newObject.hallways} Hallways` : ''
+          } ${Number(newObject.stairwells) !== 0 ? ` ${newObject.stairwells} Stairwells` : ''} ${
+            Number(newObject.foyers) !== 0 ? ` ${newObject.foyers} Foyers` : ''
+          } ${Number(newObject.offices) !== 0 ? `${newObject.offices} Offices` : ''} ${
+            Number(newObject.familyRooms) !== 0 ? `${newObject.familyRooms} Family Rooms` : ''
+          } ${Number(newObject.basement) !== 0 ? `${newObject.basement} Basement` : ''}
+    `
+        : ''
+  } else {
+    baseboardService =
+      objectTotal.totalBaseboards > 0
+        ? `-Baseboard in the following areas ${
+            newObject.selectAreasPaintBaseboards.toString().includes('Bedrooms')
+              ? `${newObject.bedrooms} Bedrooms`
+              : ''
+          } ${
+            newObject.selectAreasPaintBaseboards.toString().includes('Bathrooms')
+              ? `${newObject.bathrooms} Bathrooms`
+              : ''
+          } ${
+            newObject.selectAreasPaintBaseboards.toString().includes('Living Rooms')
+              ? `${newObject.livingRooms} Living Rooms`
+              : ''
+          } ${
+            newObject.selectAreasPaintBaseboards.toString().includes('Dining Rooms')
+              ? ` ${newObject.diningRooms} Dining Rooms`
+              : ''
+          } ${
+            newObject.selectAreasPaintBaseboards.toString().includes('Kitchens')
+              ? `${newObject.kitchens} Kitchens`
+              : ''
+          } ${
+            newObject.selectAreasPaintBaseboards.toString().includes('Hallways')
+              ? `${newObject.hallways} Hallways`
+              : ''
+          } ${
+            newObject.selectAreasPaintBaseboards.toString().includes('Stairwells')
+              ? ` ${newObject.stairwells} Stairwells`
+              : ''
+          } ${
+            newObject.selectAreasPaintBaseboards.toString().includes('Foyers')
+              ? ` ${newObject.foyers} Foyers`
+              : ''
+          } ${
+            newObject.selectAreasPaintBaseboards.toString().includes('Offices')
+              ? `${newObject.offices} Offices`
+              : ''
+          } ${
+            newObject.selectAreasPaintBaseboards.toString().includes('Family Rooms')
+              ? `${newObject.familyRooms} Family Rooms`
+              : ''
+          } ${
+            newObject.selectAreasPaintBaseboards.toString().includes('Basement')
+              ? `${newObject.basement} Basement`
+              : ''
+          }
+    `
+        : ''
+  }
 
   let crownMoldingService =
     totalCrownMolding > 0
@@ -122,7 +232,7 @@ ${Number(newObject.bedrooms) !== 0 ? 'Bedrooms' : ''} ${
   let windowWithFrame =
     Number(newObject.numberOfWindowFrames) > 0
       ? ` - ${newObject.numberOfWindowFrames} Windows with frames`
-      : 'NO WINDOWS'
+      : ' NO WINDOWS'
   let closets =
     Number(newObject.numberOfClosets) > 0 ? ` - ${newObject.numberOfClosets} Closets` : 'NO CLOSETS'
 

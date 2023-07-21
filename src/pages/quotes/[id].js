@@ -223,6 +223,10 @@ function Quotes() {
                             <td style={tableCardStyle.tableTd}>
                               <div className="grid gap-2">
                                 <p>{quotesData?.finalResult?.jobDescription}</p>
+                                <p style={borderCardStyle.desc}>
+                                  {/*<strong>"Note</strong> {quotesData?.finalResult?.bottomDescription}*/}
+                                  {formattedStr}
+                                </p>
                               </div>
                             </td>
                             <td style={tableCardStyle.tableTd} className="text-right">
@@ -237,10 +241,7 @@ function Quotes() {
                           </tr>
                         </tbody>
                       </table>
-                      <p style={borderCardStyle.desc}>
-                        {/*<strong>"Note</strong> {quotesData?.finalResult?.bottomDescription}*/}
-                        {formattedStr}
-                      </p>
+
                       <table style={tableCardStyle.table}>
                         <thead>
                           <tr>

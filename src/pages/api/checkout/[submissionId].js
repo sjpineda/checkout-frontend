@@ -32,7 +32,8 @@ export default async function getCheckout(req, res) {
   const { propertyDescription, bottomDescription } = getConstants(
     newObject,
     totalRoomSupplies,
-    totalCrownMolding
+    totalCrownMolding,
+    objectTotal
   )
   const propertyDescriptions = getPropertyDescriptions(newObject)
   console.log('propertyDescriptions', propertyDescriptions)
