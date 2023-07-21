@@ -7,9 +7,9 @@ export function getConstants(newObject, totalRoomSupplies, totalCrownMolding, ob
       serViceIncludes += '\n-Walls -Ceiling '
     }
     if (
-      objectTotal.totalCrownMolding > 0 &&
-      objectTotal.totalBaseboards > 0 &&
-      Number(newObject.numberOfWindowFrames) > 0 &&
+      objectTotal.totalCrownMolding > 0 ||
+      objectTotal.totalBaseboards > 0 ||
+      Number(newObject.numberOfWindowFrames) > 0 ||
       Number(newObject.numberOfClosets) > 0
     ) {
       serViceIncludes +=
