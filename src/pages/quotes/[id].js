@@ -222,7 +222,7 @@ function Quotes() {
                           <tr style={tableCardStyle.tableTr}>
                             <td style={tableCardStyle.tableTd}>
                               <div className="grid gap-2">
-                                <p>{quotesData?.finalResult?.jobDescription}</p>
+                                <p>Indoor Paint</p>
                                 <p style={borderCardStyle.desc}>
                                   {/*<strong>"Note</strong> {quotesData?.finalResult?.bottomDescription}*/}
                                   {formattedStr}

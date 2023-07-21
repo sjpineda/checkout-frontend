@@ -202,28 +202,81 @@ export function getConstants(newObject, totalRoomSupplies, totalCrownMolding, ob
         : ''
   }
 
-  let crownMoldingService =
-    totalCrownMolding > 0
-      ? `Crown Molding in areas including 
-${Number(newObject.bedrooms) !== 0 ? 'Bedrooms' : ''} ${
-          Number(newObject.bathrooms) !== 0 ? 'Bathrooms' : ''
-        } ${Number(newObject.livingRooms) !== 0 ? 'Living Rooms' : ''} ${
-          Number(newObject.diningRooms) !== 0 ? 'Dining Rooms' : ''
-        } ${Number(newObject.kitchens) !== 0 ? 'Kitchens' : ''} ${
-          Number(newObject.hallways) !== 0 ? 'Hallways' : ''
-        } ${Number(newObject.stairwells) !== 0 ? 'Stairwells' : ''} ${
-          Number(newObject.foyers) !== 0 ? 'Foyers' : ''
-        } ${Number(newObject.offices) !== 0 ? 'Offices' : ''} ${
-          Number(newObject.familyRooms) !== 0 ? 'Family Rooms' : ''
-        } ${Number(newObject.basement) !== 0 ? 'Basement' : ''}`
-      : ''
+  let crownMoldingService = ''
+  if (newObject.whichAreasCM.toString() === 'All areas') {
+    crownMoldingService =
+      totalCrownMolding > 0
+        ? `Crown Molding in areas including 
+          ${Number(newObject.bedrooms) !== 0 ? 'Bedrooms' : ''} ${
+            Number(newObject.bathrooms) !== 0 ? 'Bathrooms' : ''
+          } ${Number(newObject.livingRooms) !== 0 ? 'Living Rooms' : ''} ${
+            Number(newObject.diningRooms) !== 0 ? 'Dining Rooms' : ''
+          } ${Number(newObject.kitchens) !== 0 ? 'Kitchens' : ''} ${
+            Number(newObject.hallways) !== 0 ? 'Hallways' : ''
+          } ${Number(newObject.stairwells) !== 0 ? 'Stairwells' : ''} ${
+            Number(newObject.foyers) !== 0 ? 'Foyers' : ''
+          } ${Number(newObject.offices) !== 0 ? 'Offices' : ''} ${
+            Number(newObject.familyRooms) !== 0 ? 'Family Rooms' : ''
+          } ${Number(newObject.basement) !== 0 ? 'Basement' : ''}`
+        : ''
+  } else {
+    crownMoldingService =
+      totalCrownMolding > 0
+        ? `-Baseboard in the following areas ${
+            newObject.selectAreasPaintCM.toString().includes('Bedrooms')
+              ? `${newObject.bedrooms} Bedrooms`
+              : ''
+          } ${
+            newObject.selectAreasPaintCM.toString().includes('Bathrooms')
+              ? `${newObject.bathrooms} Bathrooms`
+              : ''
+          } ${
+            newObject.selectAreasPaintCM.toString().includes('Living Rooms')
+              ? `${newObject.livingRooms} Living Rooms`
+              : ''
+          } ${
+            newObject.selectAreasPaintCM.toString().includes('Dining Rooms')
+              ? ` ${newObject.diningRooms} Dining Rooms`
+              : ''
+          } ${
+            newObject.selectAreasPaintCM.toString().includes('Kitchens')
+              ? `${newObject.kitchens} Kitchens`
+              : ''
+          } ${
+            newObject.selectAreasPaintCM.toString().includes('Hallways')
+              ? `${newObject.hallways} Hallways`
+              : ''
+          } ${
+            newObject.selectAreasPaintCM.toString().includes('Stairwells')
+              ? ` ${newObject.stairwells} Stairwells`
+              : ''
+          } ${
+            newObject.selectAreasPaintCM.toString().includes('Foyers')
+              ? ` ${newObject.foyers} Foyers`
+              : ''
+          } ${
+            newObject.selectAreasPaintCM.toString().includes('Offices')
+              ? `${newObject.offices} Offices`
+              : ''
+          } ${
+            newObject.selectAreasPaintCM.toString().includes('Family Rooms')
+              ? `${newObject.familyRooms} Family Rooms`
+              : ''
+          } ${
+            newObject.selectAreasPaintCM.toString().includes('Basement')
+              ? `${newObject.basement} Basement`
+              : ''
+          }
+    `
+        : ''
+  }
 
   let noPaint = ''
   if (totalRoomSupplies === 0) {
-    noPaint = '\n- No Walls - No Ceiling - No Baseboards'
+    noPaint = 'No Walls - No Ceiling - No Baseboards'
   }
   if (totalCrownMolding === 0) {
-    noPaint = '\n- No crown molding required'
+    noPaint = 'No crown molding required'
   }
   let doorWithFrame =
     Number(newObject.numberOfDoorWithFrames) > 0
@@ -238,20 +291,32 @@ ${Number(newObject.bedrooms) !== 0 ? 'Bedrooms' : ''} ${
 
   let notesByClients = '\n* Notes (info provided by client): '
   if (newObject.currentWallFinish.includes('Matte')) {
-    notesByClients += '\nMatte'
+    notesByClients += '\n Current finish is Matte'
   } else {
-    notesByClients += '\nGloss '
+    notesByClients += '\n Current finish is Gloss '
   }
-  notesByClients += 'and new finish is '
+  notesByClients += ' and new finish is '
   if (newObject.desiredWallFinish.includes('Matte')) {
-    notesByClients += 'Matte'
+    notesByClients += 'Matte.'
   } else {
-    notesByClients += 'Gloss'
+    notesByClients += 'Gloss.'
   }
   let approx = ''
-  notesByClients += ` Approx ${newObject.numberKeepColorRooms} areas will have the same or similar colors or a similar shade of color for walls.   Approx ${newObject.numberRoomsLightToDark} areas will change to collors of the wall to a much darker shade or color. Approx ${newObject.numberRoomsDarkToLight}  areas will change the colors of the walls to a much lighter shade or color
-  `
 
+  notesByClients += ` ${
+    newObject.numberKeepColorRooms > 0
+      ? `Approx ${newObject.numberKeepColorRooms} areas will have the same or similar colors or a similar shade of color for walls.`
+      : ''
+  } ${
+    newObject.numberRoomsLightToDark > 0
+      ? ` Approx ${newObject.numberRoomsLightToDark} areas will change to colors of the wall to a much darker shade or color.`
+      : ''
+  }   ${
+    newObject.numberRoomsDarkToLight > 0
+      ? `Approx ${newObject.numberRoomsDarkToLight}  areas will change the colors of the walls to a much lighter shade or color`
+      : ''
+  } 
+  `
   if (newObject.changeTrimColor.toString().includes('Keep the same')) {
     approx += 'Trim will keep the same or similar color'
   } else {
@@ -259,7 +324,7 @@ ${Number(newObject.bedrooms) !== 0 ? 'Bedrooms' : ''} ${
      change the trim to a darker color. Approx ${newObject.numberRoomsTrimDarkToLight} areas will change the trim to a lighter color`
   }
 
-  let propertyCondition = `\nThis property is ${newObject.propertyIs} ${newObject.furnishedRange}
+  let propertyCondition = `\nThis property is  ${newObject.furnishedRange}
    Paint: ${newObject.brandOfPaint}`
 
   if (newObject.paintProvided.includes('Yes')) {
