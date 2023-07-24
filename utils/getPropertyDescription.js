@@ -11,7 +11,7 @@ const keysForProperties = [
   'foyers',
   'offices',
 ]
-export const getPropertyDescriptions = (newObject) => {
+export async const getPropertyDescriptions = (newObject) => {
   let propertyDescription = ''
   for (let i = 0; i < keysForProperties.length; i++) {
     if (Number(newObject[keysForProperties[i]]) !== 0) {
