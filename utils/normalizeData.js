@@ -354,7 +354,7 @@ const normalizeData = (answers) => {
   }
   console.log('objectTotal', objectTotal)
   const totalSuppliesWall = calculateTotalSupplies(wallKeys)
-  if (!newObject.whichAreas.includes('All areas')) {
+  if (!newObject.whichAreas.toString().includes('All areas')) {
     totalSuppliesObject.totalSuppliesWall = totalSuppliesWall
   }
   const totalSuppliesCeiling = calculateTotalSupplies(ceilingKeys)
