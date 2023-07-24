@@ -34,7 +34,7 @@ export const getJobDescription = (newObject) => {
     jobDescription += ', baseboards,'
   }
   console.log('nt]ot na', jobDescription)
-  const whatpaint = newObject.whatToPaint.toLowerCase().replace(/;/g, ',')
+  const whatpaint = newObject.whatToPaint.toString().toLowerCase().replace(/;/g, ',')
   console.log('whatpaint', whatpaint)
   jobDescription += ` ${whatpaint}`
   jobDescription += ' according to the instructions provided by the client'
