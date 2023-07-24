@@ -264,7 +264,12 @@ const normalizeData = (answers) => {
     ) {
       // let key = obj.text.split(' ').join('')
       // answers[key] = obj.hasOwnProperty('prettyFormat') ? obj.prettyFormat : obj.answer
+      // if(obj.text.includes('State and City')) {
+      //   console.log('ENTERED', obj)
+      //   newObject[propertiesDictionary['address']] += obj.answer
+      // }
       if (obj.text === 'Address') {
+        console.log("HEllO HELLo")
         let address = ''
         for (const property in obj.answer) {
           address += ` ${obj.answer[property]},`
@@ -282,6 +287,7 @@ const normalizeData = (answers) => {
     }
   }
   // newObject['address'] = newObject.address?.replace(/<br>/g, '')
+   newObject['address'] +=  ` ${answers['105'].answer}`
   console.log('obj', newObject)
   for (let item in roomKeys) {
     if (newObject.hasOwnProperty(item)) {

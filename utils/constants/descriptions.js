@@ -287,7 +287,9 @@ export function getConstants(newObject, totalRoomSupplies, totalCrownMolding, ob
       ? ` - ${newObject.numberOfWindowFrames} Windows with frames`
       : ' NO WINDOWS'
   let closets =
-    Number(newObject.numberOfClosets) > 0 ? ` - ${newObject.numberOfClosets} Closets` : 'NO CLOSETS'
+    Number(newObject.numberOfClosets) > 0
+      ? ` - ${newObject.numberOfClosets} Closets`
+      : ' NO CLOSETS'
 
   let notesByClients = '\n* Notes (info provided by client): '
   if (newObject.currentWallFinish.includes('Matte')) {
@@ -326,11 +328,23 @@ export function getConstants(newObject, totalRoomSupplies, totalCrownMolding, ob
 
   let propertyCondition = `\nThis property is  ${newObject.furnishedRange}
    Paint: ${newObject.brandOfPaint}`
-
+  let exceedHeight = ''
+  let wallPaperRemoval = ''
+  let removeDryWall = ''
   if (newObject.paintProvided.includes('Yes')) {
     propertyCondition += '\n- Paint and Supplies included'
   } else {
     propertyCondition += '\n- Paint Provided by Client'
+  }
+  if (!newObject.tenFeetWall.includes('No')) {
+    exceedHeight = `\n- ${newObject.anyCeilingsTenFeet} rooms exceed the standard height`
+  }
+  if (newObject.wallpaperRemoval !== 'NO') {
+    wallPaperRemoval = `\n- ${newObject.wallpaperRooms} walls need wallpaper removal`
+  }
+
+  if (newObject.anyRoomRawDrywall !== 'NO') {
+    removeDryWall = `\n- ${newObject.dryWallRooms} rooms have raw drywall`
   }
   let propertyDescription =
     serViceIncludes +
@@ -343,7 +357,8 @@ export function getConstants(newObject, totalRoomSupplies, totalCrownMolding, ob
     doorWithFrame +
     windowWithFrame +
     closets
-  let bottomDescription = propertyDescription + notesByClients + approx + propertyCondition
+  let bottomDescription =
+    propertyDescription + notesByClients + approx + propertyCondition + exceedHeight + wallPaperRemoval + removeDryWall
   return {
     propertyDescription,
     bottomDescription,
