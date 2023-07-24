@@ -87,8 +87,8 @@ export function materialCosts(object, totalRoomSupplies, objectTotal, baseboardK
 
   if (object.conditionOfTheTrim !== 0) {
     if (
-      object.conditionOfTheTrim.includes('Minimum') ||
-      object.conditionOfTheTrim.includes('Damaged')
+      object.conditionOfTheTrim.toString().includes('Minimum') ||
+      object.conditionOfTheTrim.toString().includes('Damaged')
     ) {
       const getObject = amountOfMaterialsMap.get('Caulking')
       getObject.amount = 1
@@ -107,7 +107,7 @@ export function materialCosts(object, totalRoomSupplies, objectTotal, baseboardK
   }
 
   let totalSum = 0
-  if (object.paintProvided.includes('Yes')) {
+  if (object.paintProvided.toString().includes('Yes')) {
     if (Number(object.numberRoomsTrimLightToDark) > 0) {
       totalSum = Math.round(
         Number(objectTotal.totalBaseboards) * 0.2 +
@@ -173,7 +173,7 @@ export function materialCosts(object, totalRoomSupplies, objectTotal, baseboardK
     amountOfMaterialsMap.set('Trim Paint (Semi-Gloss)', getObject)
   }
 
-  if (object.paintProvided.includes('Yes')) {
+  if (object.paintProvided.toString().includes('Yes')) {
     let totalSum = 0
     let trimSumValue = 0
     if (object?.conditionOfTheWalls !== 0) {
@@ -224,7 +224,7 @@ export function materialCosts(object, totalRoomSupplies, objectTotal, baseboardK
     if (object.desiredWallFinish === object.currentWallFinish) {
       totalSumWallsPaintFinish = 0
     } else {
-      if (object.desiredWallFinish.includes('Matte')) {
+      if (object.desiredWallFinish.toString().includes('Matte')) {
         console.log('got matte')
         totalSumWallsPaintFinish = (totalSumWallsPaintFirst + totalSumWallsPaintColorChange) * 0.1
       } else {

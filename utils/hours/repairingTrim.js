@@ -8,7 +8,7 @@ export const repairingTrim = (
   let mediumRepair = 0
   let advanceRepair = 0
   if (object.conditionOfTheTrim !== 0) {
-    if (object.conditionOfTheTrim.includes('Good')) {
+    if (object.conditionOfTheTrim.toString().includes('Good')) {
       basicRepair = isNaN(totalSuppliesObject.totalSuppliesBaseboards)
         ? 0
         : Number(totalSuppliesObject.totalSuppliesBaseboards * 0.1) +
@@ -20,7 +20,7 @@ export const repairingTrim = (
           object.numberOfDoorFrames * 0.1 +
           object.numberOfClosets * 0.1
     }
-    if (object.conditionOfTheTrim.includes('Minimum')) {
+    if (object.conditionOfTheTrim.toString().includes('Minimum')) {
       mediumRepair = isNaN(totalSuppliesObject.totalSuppliesBaseboards)
         ? 0
         : Number(totalSuppliesObject.totalSuppliesBaseboards) * 0.35 +
@@ -32,7 +32,7 @@ export const repairingTrim = (
           object.numberOfDoorFrames * 0.2 +
           object.numberOfClosets * 0.2
     }
-    if (object.conditionOfTheTrim.includes('Damaged')) {
+    if (object.conditionOfTheTrim.toString().includes('Damaged')) {
       advanceRepair = isNaN(totalSuppliesObject.totalSuppliesBaseboards)
         ? 0
         : Number(totalSuppliesObject.totalSuppliesBaseboards) * 0.5 +

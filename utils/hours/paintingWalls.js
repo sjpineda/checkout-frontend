@@ -6,13 +6,13 @@ export const paintingWallsHours = (totalRoomSupplies, object, objectTotal) => {
   let additionCoatsMatte = 0
   if (object.desiredWallFinish === object.currentWallFinish) {
     additionCoatsMatte = 0
-  } else if (object.desiredWallFinish.includes('Matte')) {
+  } else if (object.desiredWallFinish.toString().includes('Matte')) {
     additionCoatsMatte = totalRoomSupplies * 0.3 * 4
   }
   let additionCoatGloss = 0
   if (object.desiredWallFinish === object.currentWallFinish) {
     additionCoatGloss = 0
-  } else if (object.desiredWallFinish.includes('Gloss')) {
+  } else if (object.desiredWallFinish.toString().includes('Gloss')) {
     additionCoatGloss = totalRoomSupplies * 0.3 * 4
   }
 

@@ -1,6 +1,6 @@
 export function getConstants(newObject, totalRoomSupplies, totalCrownMolding, objectTotal) {
   let serViceIncludes = '\nThis service includes:'
-  if (newObject.propertyIs.includes('Furnished')) {
+  if (newObject.propertyIs.toString().includes('Furnished')) {
     serViceIncludes +=
       '\n-Move furniture away from application areas.\n-Protecting and covering of existing surface(s), floors, and furniture with drop cloths and plastic sheets where necessary.'
     if (totalRoomSupplies > 0) {
@@ -292,13 +292,13 @@ export function getConstants(newObject, totalRoomSupplies, totalCrownMolding, ob
       : ' NO CLOSETS'
 
   let notesByClients = '\n* Notes (info provided by client): '
-  if (newObject.currentWallFinish.includes('Matte')) {
+  if (newObject.currentWallFinish.toString().includes('Matte')) {
     notesByClients += '\n Current finish is Matte'
   } else {
     notesByClients += '\n Current finish is Gloss '
   }
   notesByClients += ' and new finish is '
-  if (newObject.desiredWallFinish.includes('Matte')) {
+  if (newObject.desiredWallFinish.toString().includes('Matte')) {
     notesByClients += 'Matte.'
   } else {
     notesByClients += 'Gloss.'
@@ -331,12 +331,12 @@ export function getConstants(newObject, totalRoomSupplies, totalCrownMolding, ob
   let exceedHeight = ''
   let wallPaperRemoval = ''
   let removeDryWall = ''
-  if (newObject.paintProvided.includes('Yes')) {
+  if (newObject.paintProvided.toString().includes('Yes')) {
     propertyCondition += '\n- Paint and Supplies included'
   } else {
     propertyCondition += '\n- Paint Provided by Client'
   }
-  if (!newObject.tenFeetWall.includes('No')) {
+  if (!newObject.tenFeetWall.toString().includes('No')) {
     exceedHeight = `\n- ${newObject.anyCeilingsTenFeet} rooms exceed the standard height`
   }
   if (newObject.wallpaperRemoval !== 'NO') {
