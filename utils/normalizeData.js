@@ -417,51 +417,51 @@ function calculateTotalSupplies(placeKeys) {
 }
 function getTotalRooms(newObject, selectAreas, placeKeys) {
   let totalPlace = 0
-  if (selectAreas.includes('Bedrooms')) {
+  if (selectAreas.toString().includes('Bedrooms')) {
     totalPlace += Number(newObject.bedrooms)
     placeKeys['bedrooms'].value = Number(newObject.bedrooms)
   }
-  if (selectAreas.includes('Bathrooms')) {
+  if (selectAreas.toString().includes('Bathrooms')) {
     totalPlace += Number(newObject.bathrooms)
     placeKeys['bathrooms'].value = Number(newObject.bathrooms)
   }
-  if (selectAreas.includes('Living Rooms')) {
+  if (selectAreas.toString().includes('Living Rooms')) {
     totalPlace += Number(newObject.livingRooms)
     placeKeys['livingRooms'].value = Number(newObject.livingRooms)
   }
-  if (selectAreas.includes('Family')) {
+  if (selectAreas.toString().includes('Family')) {
     totalPlace += Number(newObject.familyRooms)
     placeKeys['familyRooms'].value = Number(newObject.familyRooms)
   }
-  if (selectAreas.includes('Dining')) {
+  if (selectAreas.toString().includes('Dining')) {
     totalPlace += Number(newObject.diningRooms)
     placeKeys['diningRooms'].value = Number(newObject.diningRooms)
   }
-  if (selectAreas.includes('Kitchens')) {
+  if (selectAreas.toString().includes('Kitchens')) {
     totalPlace += Number(newObject.kitchens)
     placeKeys['kitchens'].value = Number(newObject.kitchens)
   }
-  if (selectAreas.includes('Hallway')) {
+  if (selectAreas.toString().includes('Hallway')) {
     totalPlace += Number(newObject.hallways)
     placeKeys['hallways'].value = Number(newObject.hallways)
   }
-  if (selectAreas.includes('Stairwell')) {
+  if (selectAreas.toString().includes('Stairwell')) {
     totalPlace += Number(newObject.stairwells)
     placeKeys['stairwells'].value = Number(newObject.stairwells)
   }
-  if (selectAreas.includes('Foyer')) {
+  if (selectAreas.toString().includes('Foyer')) {
     totalPlace += Number(newObject.foyers)
     placeKeys['foyers'].value = Number(newObject.foyers)
   }
-  if (selectAreas.includes('Office')) {
+  if (selectAreas.toString().includes('Office')) {
     totalPlace += Number(newObject.offices)
     placeKeys['offices'].value = Number(newObject.offices)
   }
-  if (selectAreas.includes('Den')) {
+  if (selectAreas.toString().includes('Den')) {
     totalPlace += Number(newObject.dens)
     placeKeys['dens'].value = Number(newObject.dens)
   }
-  if (selectAreas.includes('Basement')) {
+  if (selectAreas.toString().includes('Basement')) {
     totalPlace += Number(newObject.basement)
     placeKeys['basement'].value = Number(newObject.basement)
   }
