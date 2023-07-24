@@ -29,7 +29,7 @@ export default async function getCheckout(req, res) {
   } = normalizeData(answers)
 
   // const propertyDescription = getDescriptions(newObject)
-  const { propertyDescription, bottomDescription } = getConstants(
+  const { propertyDescription, bottomDescription } = await getConstants(
     newObject,
     totalRoomSupplies,
     totalCrownMolding,

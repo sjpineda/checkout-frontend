@@ -1,4 +1,4 @@
-export function getConstants(newObject, totalRoomSupplies, totalCrownMolding, objectTotal) {
+export async function getConstants(newObject, totalRoomSupplies, totalCrownMolding, objectTotal) {
   let serViceIncludes = '\nThis service includes:'
   if (newObject.propertyIs.toString().includes('Furnished')) {
     serViceIncludes +=
