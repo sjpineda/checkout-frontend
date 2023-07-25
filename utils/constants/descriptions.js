@@ -1,10 +1,13 @@
 export async function getConstants(newObject, totalRoomSupplies, totalCrownMolding, objectTotal) {
   let serViceIncludes = '\nThis service includes:'
   if (!newObject.propertyIs.toString().includes('Vacant')) {
-    serViceIncludes +=
-      '\n-Move furniture away from application areas.\n-Protecting and covering of existing surface(s), floors, and furniture with drop cloths and plastic sheets where necessary.'
-
+    serViceIncludes += '\n-Move furniture away from application areas.'
   }
+  serViceIncludes += `\n-Protecting and covering of existing ${
+    !newObject.propertyIs.toString().includes('Vacant')
+      ? 'surface(s), floors, and furniture with drop cloths and plastic sheets where necessary'
+      : 'surface(s), floors with drop cloths and plastic sheets where necessary'
+  } `
   if (totalRoomSupplies > 0) {
     serViceIncludes += '\n-Walls -Ceiling '
   }
@@ -280,8 +283,8 @@ export async function getConstants(newObject, totalRoomSupplies, totalCrownMoldi
   }
   let doorWithFrame =
     Number(newObject.numberOfDoorFrames) > 0
-      ? `\n- ${newObject.numberOfDoorFrames} Doors with frames`
-      : '\n- NO DOORS'
+      ? `- ${newObject.numberOfDoorFrames} Door frames`
+      : '- NO DOOR FRAMES'
   let windowWithFrame =
     Number(newObject.numberOfWindowFrames) > 0
       ? ` - ${newObject.numberOfWindowFrames} Windows with frames`
@@ -290,7 +293,10 @@ export async function getConstants(newObject, totalRoomSupplies, totalCrownMoldi
     Number(newObject.numberOfClosets) > 0
       ? ` - ${newObject.numberOfClosets} Closets`
       : ' NO CLOSETS'
-
+  let doorFrames =
+    Number(newObject.numberOfDoorWithFrames) > 0
+      ? ` - ${newObject.numberOfDoorWithFrames} Doors with frames`
+      : ' NO DOORS WITH FRAMES'
   let notesByClients = '\n* Notes (info provided by client): '
   if (newObject.currentWallFinish.toString().includes('Matte')) {
     notesByClients += '\n Current finish is Matte'
@@ -358,6 +364,7 @@ export async function getConstants(newObject, totalRoomSupplies, totalCrownMoldi
     noPaint +
     doorWithFrame +
     windowWithFrame +
+    doorFrames +
     closets
   let bottomDescription =
     propertyDescription +
