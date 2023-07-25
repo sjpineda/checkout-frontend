@@ -1,6 +1,6 @@
 export async function getConstants(newObject, totalRoomSupplies, totalCrownMolding, objectTotal) {
   let serViceIncludes = '\nThis service includes:'
-  if (newObject.propertyIs.toString().includes('Furnished')) {
+  if (newObject.propertyIs.toString().includes('Vacant')) {
     serViceIncludes +=
       '\n-Move furniture away from application areas.\n-Protecting and covering of existing surface(s), floors, and furniture with drop cloths and plastic sheets where necessary.'
     if (totalRoomSupplies > 0) {
@@ -65,7 +65,7 @@ export async function getConstants(newObject, totalRoomSupplies, totalCrownMoldi
   if (newObject.whichAreasCeilings.toString() === 'All areas') {
     ceilingService =
       objectTotal.totalCeilings > 0
-        ? `-Ceiling in areas including   ${
+        ? `-Ceiling in the following areas  ${
             Number(newObject.bedrooms) !== 0 ? `${newObject.bedrooms} Bedrooms` : ''
           } ${Number(newObject.bathrooms) !== 0 ? `${newObject.bathrooms} Bathrooms` : ''} ${
             Number(newObject.livingRooms) !== 0 ? `${newObject.livingRooms} Living Rooms` : ''
@@ -326,7 +326,9 @@ export async function getConstants(newObject, totalRoomSupplies, totalCrownMoldi
      change the trim to a darker color. Approx ${newObject.numberRoomsTrimDarkToLight} areas will change the trim to a lighter color`
   }
 
-  let propertyCondition = `\nThis property is  ${newObject.furnishedRange}
+  let propertyCondition = `\nThis property is  ${
+    Number(newObject.furnishedRange) === 0 ? newObject.propertyIs : newObject.furnishedRange
+  } 
    Paint: ${newObject.brandOfPaint}`
   let exceedHeight = ''
   let wallPaperRemoval = ''
@@ -339,11 +341,11 @@ export async function getConstants(newObject, totalRoomSupplies, totalCrownMoldi
   if (!newObject.tenFeetWall.toString().includes('No')) {
     exceedHeight = `\n- ${newObject.anyCeilingsTenFeet} rooms exceed the standard height`
   }
-  if (newObject.wallpaperRemoval !== 'NO') {
+  if (newObject.wallpaperRemoval === 'YES') {
     wallPaperRemoval = `\n- ${newObject.wallpaperRooms} walls need wallpaper removal`
   }
 
-  if (newObject.anyRoomRawDrywall !== 'NO') {
+  if (newObject.anyRoomRawDrywall !== 'No') {
     removeDryWall = `\n- ${newObject.dryWallRooms} rooms have raw drywall`
   }
   let propertyDescription =
@@ -358,7 +360,13 @@ export async function getConstants(newObject, totalRoomSupplies, totalCrownMoldi
     windowWithFrame +
     closets
   let bottomDescription =
-    propertyDescription + notesByClients + approx + propertyCondition + exceedHeight + wallPaperRemoval + removeDryWall
+    propertyDescription +
+    notesByClients +
+    approx +
+    exceedHeight +
+    wallPaperRemoval +
+    removeDryWall +
+    propertyCondition
   return {
     propertyDescription,
     bottomDescription,

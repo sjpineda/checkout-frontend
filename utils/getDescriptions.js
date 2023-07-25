@@ -11,7 +11,7 @@ const keysForProperties = [
   'foyers',
   'offices',
 ]
-export const getDescriptions = (newObject) => {
+export  const getDescriptions = (newObject) => {
   let propertyDescription = ''
   for (let i = 0; i < keysForProperties.length; i++) {
     if (Number(newObject[keysForProperties[i]]) !== 0) {
@@ -25,7 +25,7 @@ export const getDescriptions = (newObject) => {
   return propertyDescription.slice(0, -2)
 }
 
-export async const getJobDescription = (newObject) => {
+export  const getJobDescription = (newObject) => {
   let jobDescription = 'Painting service for walls'
   if (newObject.paintCeilings.toString() === 'Yes') {
     jobDescription += ', and ceilings'
