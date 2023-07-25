@@ -25,7 +25,7 @@ export  const getDescriptions = (newObject) => {
   return propertyDescription.slice(0, -2)
 }
 
-export  const getJobDescription = (newObject) => {
+export  const getJobDescription = async (newObject) => {
   let jobDescription = 'Painting service for walls'
   if (newObject.paintCeilings.toString() === 'Yes') {
     jobDescription += ', and ceilings'
