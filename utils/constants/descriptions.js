@@ -3,20 +3,20 @@ export async function getConstants(newObject, totalRoomSupplies, totalCrownMoldi
   if (!newObject.propertyIs.toString().includes('Vacant')) {
     serViceIncludes +=
       '\n-Move furniture away from application areas.\n-Protecting and covering of existing surface(s), floors, and furniture with drop cloths and plastic sheets where necessary.'
-    if (totalRoomSupplies > 0) {
-      serViceIncludes += '\n-Walls -Ceiling '
-    }
-    if (
-      objectTotal.totalCrownMolding > 0 ||
-      objectTotal.totalBaseboards > 0 ||
-      Number(newObject.numberOfWindowFrames) > 0 ||
-      Number(newObject.numberOfClosets) > 0
-    ) {
-      serViceIncludes +=
-        '-Trim, surface preparation for paint (Repairing and sanding localized areas Cracks and nail holes will be filled where necessary) '
-    }
-  }
 
+  }
+  if (totalRoomSupplies > 0) {
+    serViceIncludes += '\n-Walls -Ceiling '
+  }
+  if (
+    objectTotal.totalCrownMolding > 0 ||
+    objectTotal.totalBaseboards > 0 ||
+    Number(newObject.numberOfWindowFrames) > 0 ||
+    Number(newObject.numberOfClosets) > 0
+  ) {
+    serViceIncludes +=
+      '-Trim, surface preparation for paint (Repairing and sanding localized areas Cracks and nail holes will be filled where necessary) '
+  }
   let considering = '\n-Considering: '
   if (newObject.conditionOfTheWalls?.toString().includes('Good')) {
     considering += `Walls ${commonStrings.goodCondition}`
