@@ -96,9 +96,11 @@ function Quotes() {
   const tableCardStyle = {
     heading: { fontSize: '16px', fontWeight: '700', margin: '25px 0 15px' },
     table: { width: '100%' },
-    tableHead: { fontSize: '14px', padding: '10px 0' },
+    tableHead: { fontSize: '14px', padding: '10px 16px' },
+    tableTotal: { fontSize: '14px', padding: '10px 0px' },
+
     tableTr: { borderTop: '1px solid #f2f2f2', verticalAlign: 'baseline' },
-    tableTd: { padding: '1px 0', fontSize: '14px', color: '#555555' },
+    tableTd: { padding: '1px 14px', fontSize: '14px', color: '#555555' },
     tableList: { margin: '5px 0', padding: '0 0 0 10px' },
   }
 
@@ -288,7 +290,7 @@ function Quotes() {
                             <td style={tableCardStyle.tableTd} className="text-right"></td>
                             <td style={tableCardStyle.tableTd} className="text-right">
                               <div className="grid gap-1">
-                                <p>${quotesData?.totalCost * 0.07}</p>
+                                <p>${(quotesData?.totalCost * 0.07).toFixed(3)}</p>
                               </div>
                             </td>
                           </tr>
@@ -297,13 +299,14 @@ function Quotes() {
                       <table style={tableCardStyle.table}>
                         <thead>
                           <tr>
-                            <th style={tableCardStyle.tableHead}></th>
-                            <th className="text-right" style={tableCardStyle.tableHead}></th>
-                            <th style={tableCardStyle.tableHead}>Total</th>
+                            <th style={tableCardStyle.tableTotal}></th>
+                            <th className="text-right" style={tableCardStyle.tableTotal}></th>
+                            <th style={tableCardStyle.tableTotal}>Total</th>
                             <th className="text-right" style={tableCardStyle.tableHead}>
-                              {`                ${
-                                quotesData?.totalCost - quotesData?.totalCost * 0.07
-                              }`}
+                              {`                ${(
+                                quotesData?.totalCost -
+                                quotesData?.totalCost * 0.07
+                              ).toFixed(2)}`}
                             </th>
                           </tr>
                         </thead>
