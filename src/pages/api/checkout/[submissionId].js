@@ -36,7 +36,7 @@ export default async function getCheckout(req, res) {
     objectTotal
   )
   const propertyDescriptions = await getPropertyDescriptions(newObject)
-  const jobDescription = await getJobDescription(newObject)
+  const jobDescription = await getJobDescription(newObject, objectTotal)
   const coveringFurnitureCost = coveringFurniture(totalRoomSupplies, newObject)
   // console.log('coveringFurnitureCost', coveringFurnitureCost)
   const primingCost = primingHoursTotal(

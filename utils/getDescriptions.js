@@ -25,13 +25,16 @@ export  const getDescriptions = (newObject) => {
   return propertyDescription.slice(0, -2)
 }
 
-export  const getJobDescription = async (newObject) => {
+export  const getJobDescription = async (newObject ,objectTotal) => {
   let jobDescription = 'Painting service for walls'
   if (newObject.paintCeilings.toString() === 'Yes') {
     jobDescription += ', and ceilings'
   }
-  if (newObject.trimPaintedBaseboardsCM === 'Baseboards') {
+  if (objectTotal.totalBaseboards >0) {
     jobDescription += ', baseboards,'
+  }
+  if (objectTotal.totalCrownMolding >0) {
+    jobDescription += ' crown molding,'
   }
   console.log('nt]ot na', jobDescription)
   const whatpaint = newObject.whatToPaint.toString().toLowerCase().replace(/;/g, ',')
