@@ -1,6 +1,6 @@
 export async function getConstants(newObject, totalRoomSupplies, totalCrownMolding, objectTotal) {
   let serViceIncludes = '\nThis service includes:'
-  if (newObject.propertyIs.toString().includes('Vacant')) {
+  if (!newObject.propertyIs.toString().includes('Vacant')) {
     serViceIncludes +=
       '\n-Move furniture away from application areas.\n-Protecting and covering of existing surface(s), floors, and furniture with drop cloths and plastic sheets where necessary.'
     if (totalRoomSupplies > 0) {
@@ -83,7 +83,7 @@ export async function getConstants(newObject, totalRoomSupplies, totalCrownMoldi
   } else {
     ceilingService =
       objectTotal.totalCeilings > 0
-        ? `-Ceiling in areas including   ${
+        ? `-Ceiling in the following areas  ${
             newObject.selectAreasCeilings.toString().includes('Bedrooms')
               ? `${newObject.bedrooms} Bedrooms`
               : ''
@@ -206,7 +206,7 @@ export async function getConstants(newObject, totalRoomSupplies, totalCrownMoldi
   if (newObject.whichAreasCM.toString() === 'All areas') {
     crownMoldingService =
       totalCrownMolding > 0
-        ? `Crown Molding in areas including 
+        ? `Crown Molding in the following areas
           ${Number(newObject.bedrooms) !== 0 ? 'Bedrooms' : ''} ${
             Number(newObject.bathrooms) !== 0 ? 'Bathrooms' : ''
           } ${Number(newObject.livingRooms) !== 0 ? 'Living Rooms' : ''} ${
@@ -222,7 +222,7 @@ export async function getConstants(newObject, totalRoomSupplies, totalCrownMoldi
   } else {
     crownMoldingService =
       totalCrownMolding > 0
-        ? `-Baseboard in the following areas ${
+        ? `-Crown Molding in the following areas ${
             newObject.selectAreasPaintCM.toString().includes('Bedrooms')
               ? `${newObject.bedrooms} Bedrooms`
               : ''
@@ -279,8 +279,8 @@ export async function getConstants(newObject, totalRoomSupplies, totalCrownMoldi
     noPaint = 'No crown molding required'
   }
   let doorWithFrame =
-    Number(newObject.numberOfDoorWithFrames) > 0
-      ? `\n- ${newObject.numberOfDoorWithFrames} Doors with frames`
+    Number(newObject.numberOfDoorFrames) > 0
+      ? `\n- ${newObject.numberOfDoorFrames} Doors with frames`
       : '\n- NO DOORS'
   let windowWithFrame =
     Number(newObject.numberOfWindowFrames) > 0

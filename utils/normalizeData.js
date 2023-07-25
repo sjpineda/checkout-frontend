@@ -250,7 +250,7 @@ const propertiesDictionary = {
 }
 // let totalRooms = 0
 // let totalRoomSupplies = 0
-const normalizeData = (answers) => {
+const normalizeData = async (answers) => {
   let newObject = {}
   let totalRooms = 0
   let totalRoomSupplies = 0

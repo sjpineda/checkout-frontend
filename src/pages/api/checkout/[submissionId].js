@@ -26,7 +26,7 @@ export default async function getCheckout(req, res) {
     objectTotal,
     baseboardKeys,
     totalSuppliesObject,
-  } = normalizeData(answers)
+  } = await normalizeData(answers)
 
   // const propertyDescription = getDescriptions(newObject)
   const { propertyDescription, bottomDescription } = await getConstants(
