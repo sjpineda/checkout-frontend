@@ -102,7 +102,10 @@ export default async function getCheckout(req, res) {
   console.log('totalOfCosts', totalOfCosts)
   const contigency = totalOfCosts * 0.05
   console.log('contigency', contigency)
-  const finalPrice = ((totalOfCosts + contigency) / 0.57).toFixed(2).toLocaleString()
+  let finalPrice = ((totalOfCosts + contigency) / 0.57).toFixed(2)
+  console.log('finalPrice', Number(finalPrice))
+  // finalPrice = ((Number(finalPrice) * 0.07).toFixed(2) + finalPrice).toLocaleString()
+  finalPrice = ((Number(finalPrice )* 0.07) + Number(finalPrice)).toFixed(2)
   const ccExtraCharge = finalPrice * 0.03
   const profit = finalPrice - totalOfCosts - contigency - ccExtraCharge
   const profitPercentage = (profit / finalPrice) * 100
