@@ -5,7 +5,7 @@ import Loading from '@/pages/loading'
 import AuthorizeCreditCard from '@/pages/api/authorizenet/create-payment'
 import PaymentCard from '@/pages/card'
 import { toast } from 'react-toastify'
-
+import "../../descStyle.css"
 function Quotes() {
   const router = useRouter()
   let { id } = router.query
@@ -43,6 +43,7 @@ function Quotes() {
 
   const style = {
     imageStyle: { height: '45px' },
+
     fixedTop: {
       padding: '10px 25px',
       backgroundColor: 'white',
@@ -90,7 +91,7 @@ function Quotes() {
   const borderCardStyle = {
     card: { border: '1px solid #ccc', padding: '20px', margin: '20px 0' },
     cardTitle: { fontSize: '16px', fontWeight: '700', margin: '0' },
-    desc: { fontSize: '14px' },
+    desc: { fontSize: '14px',},
   }
 
   const tableCardStyle = {
@@ -225,10 +226,7 @@ function Quotes() {
                             <td style={tableCardStyle.tableTd}>
                               <div className="grid gap-2">
                                 <p>Indoor Paint</p>
-                                <p style={borderCardStyle.desc}>
-                                  {/*<strong>"Note</strong> {quotesData?.finalResult?.bottomDescription}*/}
-                                  {formattedStr}
-                                </p>
+
                               </div>
                             </td>
                             <td style={tableCardStyle.tableTd} className="text-right">
@@ -242,8 +240,12 @@ function Quotes() {
                             </td>
                           </tr>
                         </tbody>
-                      </table>
 
+                      </table>
+                      <p className="col-lg-10 col-md-6 col-sm-10" style={borderCardStyle.desc}>
+                        {/*<strong>"Note</strong> {quotesData?.finalResult?.bottomDescription}*/}
+                        {formattedStr}
+                      </p>
                       <table style={tableCardStyle.table}>
                         <thead>
                           <tr>
@@ -312,7 +314,7 @@ function Quotes() {
                         </thead>
                       </table>
                       <h2 style={tableCardStyle.heading}>Signature</h2>
-                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <div className="flex-container">
                         <div>
                           <div style={style.signatureContainer}></div>
                           Signature
