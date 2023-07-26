@@ -276,6 +276,7 @@ const normalizeData = async (answers) => {
         }
         address = address.replace(/,$/, '')
         newObject[propertiesDictionary[obj.name]] = address
+        newObject.addressLine = obj.answer.addr_line1
       } else {
         const dictionaryName = propertiesDictionary[obj.name]
         newObject[dictionaryName] = obj.hasOwnProperty('prettyFormat')

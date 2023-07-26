@@ -134,7 +134,7 @@ function Quotes() {
                   <div style={style.prtBanner}>
                     <div style={style.container}>
                       <h2 style={style.prtBannerTitle}>
-                        {quotesData?.finalResult?.userInfo?.name}
+                        {quotesData?.finalResult?.userInfo?.title}
                       </h2>
                       <div className="row">
                         <div className="col-lg-8 col-md-2 col-8 mb-3">

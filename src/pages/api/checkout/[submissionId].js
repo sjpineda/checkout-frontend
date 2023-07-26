@@ -18,6 +18,7 @@ export default async function getCheckout(req, res) {
   const url = `${process.env.JOTFORM_BASE_URL}/submission/${submissionId}?apiKey=${apiKey}`
   const response = await Network.get(url)
   const answers = response.content.answers
+  console.log('answers', answers)
   let {
     newObject,
     totalRoomSupplies,
@@ -112,6 +113,7 @@ export default async function getCheckout(req, res) {
   const finalResult = {
     userInfo: {
       name: newObject.fullName,
+      title: newObject.addressLine,
       email: newObject.email,
       phoneNumber: newObject.phoneNumber,
       address: newObject.address,
