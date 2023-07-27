@@ -9,7 +9,7 @@ export async function getConstants(newObject, totalRoomSupplies, totalCrownMoldi
       : 'surface(s), floors with drop cloths and plastic sheets where necessary'
   } `
   if (totalRoomSupplies > 0) {
-    serViceIncludes += '\n-Walls -Ceiling '
+    serViceIncludes += `\n ${objectTotal.totalWalls > 0 ? '-Walls ' : ''} ${objectTotal.totalCeilings > 0 ? '-Ceiling ' : ' '}`
   }
   if (
     objectTotal.totalCrownMolding > 0 ||
