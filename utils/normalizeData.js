@@ -1,193 +1,4 @@
-const roomKeys = {
-  bedrooms: {
-    value: 1,
-  },
-  basement: {
-    value: 2,
-  },
-  bathrooms: {
-    value: 0.6,
-  },
-  livingRooms: {
-    value: 1,
-  },
-  stairwells: {
-    value: 0.8,
-  },
-  hallways: {
-    value: 0.8,
-  },
-  kitchens: {
-    value: 0.8,
-  },
-  familyRooms: {
-    value: 1,
-  },
-  diningRooms: {
-    value: 1,
-  },
-  foyers: {
-    value: 1.3,
-  },
-  offices: {
-    value: 0.7,
-  },
-  dens: {
-    value: 0.7,
-  },
-}
-let wallKeys = {
-  bedrooms: {
-    value: 0,
-  },
-  basement: {
-    value: 0,
-  },
-  bathrooms: {
-    value: 0,
-  },
-  livingRooms: {
-    value: 0,
-  },
-  stairwells: {
-    value: 0,
-  },
-  hallways: {
-    value: 0,
-  },
-  kitchens: {
-    value: 0,
-  },
-  familyRooms: {
-    value: 0,
-  },
-  diningRooms: {
-    value: 0,
-  },
-  foyers: {
-    value: 0,
-  },
-  offices: {
-    value: 0,
-  },
-  dens: {
-    value: 0,
-  },
-}
-let ceilingKeys = {
-  bedrooms: {
-    value: 0,
-  },
-  basement: {
-    value: 0,
-  },
-  bathrooms: {
-    value: 0,
-  },
-  livingRooms: {
-    value: 0,
-  },
-  stairwells: {
-    value: 0,
-  },
-  hallways: {
-    value: 0,
-  },
-  kitchens: {
-    value: 0,
-  },
-  familyRooms: {
-    value: 0,
-  },
-  diningRooms: {
-    value: 0,
-  },
-  foyers: {
-    value: 0,
-  },
-  offices: {
-    value: 0,
-  },
-  dens: {
-    value: 0,
-  },
-}
-let baseboardKeys = {
-  bedrooms: {
-    value: 0,
-  },
-  basement: {
-    value: 0,
-  },
-  bathrooms: {
-    value: 0,
-  },
-  livingRooms: {
-    value: 0,
-  },
-  stairwells: {
-    value: 0,
-  },
-  hallways: {
-    value: 0,
-  },
-  kitchens: {
-    value: 0,
-  },
-  familyRooms: {
-    value: 0,
-  },
-  diningRooms: {
-    value: 0,
-  },
-  foyers: {
-    value: 0,
-  },
-  offices: {
-    value: 0,
-  },
-  dens: {
-    value: 0,
-  },
-}
-let crownMoldKeys = {
-  bedrooms: {
-    value: 0,
-  },
-  basement: {
-    value: 0,
-  },
-  bathrooms: {
-    value: 0,
-  },
-  livingRooms: {
-    value: 0,
-  },
-  stairwells: {
-    value: 0,
-  },
-  hallways: {
-    value: 0,
-  },
-  kitchens: {
-    value: 0,
-  },
-  familyRooms: {
-    value: 0,
-  },
-  diningRooms: {
-    value: 0,
-  },
-  foyers: {
-    value: 0,
-  },
-  offices: {
-    value: 0,
-  },
-  dens: {
-    value: 0,
-  },
-}
+
 const propertiesDictionary = {
   email: 'email',
   phoneNumber: 'phoneNumber',
@@ -251,6 +62,196 @@ const propertiesDictionary = {
 // let totalRooms = 0
 // let totalRoomSupplies = 0
 const normalizeData = async (answers) => {
+  const roomKeys = {
+    bedrooms: {
+      value: 1,
+    },
+    basement: {
+      value: 2,
+    },
+    bathrooms: {
+      value: 0.6,
+    },
+    livingRooms: {
+      value: 1,
+    },
+    stairwells: {
+      value: 0.8,
+    },
+    hallways: {
+      value: 0.8,
+    },
+    kitchens: {
+      value: 0.8,
+    },
+    familyRooms: {
+      value: 1,
+    },
+    diningRooms: {
+      value: 1,
+    },
+    foyers: {
+      value: 1.3,
+    },
+    offices: {
+      value: 0.7,
+    },
+    dens: {
+      value: 0.7,
+    },
+  }
+  let wallKeys = {
+    bedrooms: {
+      value: 0,
+    },
+    basement: {
+      value: 0,
+    },
+    bathrooms: {
+      value: 0,
+    },
+    livingRooms: {
+      value: 0,
+    },
+    stairwells: {
+      value: 0,
+    },
+    hallways: {
+      value: 0,
+    },
+    kitchens: {
+      value: 0,
+    },
+    familyRooms: {
+      value: 0,
+    },
+    diningRooms: {
+      value: 0,
+    },
+    foyers: {
+      value: 0,
+    },
+    offices: {
+      value: 0,
+    },
+    dens: {
+      value: 0,
+    },
+  }
+  let ceilingKeys = {
+    bedrooms: {
+      value: 0,
+    },
+    basement: {
+      value: 0,
+    },
+    bathrooms: {
+      value: 0,
+    },
+    livingRooms: {
+      value: 0,
+    },
+    stairwells: {
+      value: 0,
+    },
+    hallways: {
+      value: 0,
+    },
+    kitchens: {
+      value: 0,
+    },
+    familyRooms: {
+      value: 0,
+    },
+    diningRooms: {
+      value: 0,
+    },
+    foyers: {
+      value: 0,
+    },
+    offices: {
+      value: 0,
+    },
+    dens: {
+      value: 0,
+    },
+  }
+  let baseboardKeys = {
+    bedrooms: {
+      value: 0,
+    },
+    basement: {
+      value: 0,
+    },
+    bathrooms: {
+      value: 0,
+    },
+    livingRooms: {
+      value: 0,
+    },
+    stairwells: {
+      value: 0,
+    },
+    hallways: {
+      value: 0,
+    },
+    kitchens: {
+      value: 0,
+    },
+    familyRooms: {
+      value: 0,
+    },
+    diningRooms: {
+      value: 0,
+    },
+    foyers: {
+      value: 0,
+    },
+    offices: {
+      value: 0,
+    },
+    dens: {
+      value: 0,
+    },
+  }
+  let crownMoldKeys = {
+    bedrooms: {
+      value: 0,
+    },
+    basement: {
+      value: 0,
+    },
+    bathrooms: {
+      value: 0,
+    },
+    livingRooms: {
+      value: 0,
+    },
+    stairwells: {
+      value: 0,
+    },
+    hallways: {
+      value: 0,
+    },
+    kitchens: {
+      value: 0,
+    },
+    familyRooms: {
+      value: 0,
+    },
+    diningRooms: {
+      value: 0,
+    },
+    foyers: {
+      value: 0,
+    },
+    offices: {
+      value: 0,
+    },
+    dens: {
+      value: 0,
+    },
+  }
   let newObject = {}
   let totalRooms = 0
   let totalRoomSupplies = 0
@@ -399,6 +400,65 @@ const normalizeData = async (answers) => {
   totalSuppliesObject.totalSuppliesCeilings =
     totalSuppliesObject.totalSuppliesCeilings * heightPercent
 
+  function calculateTotalSupplies(placeKeys) {
+    let totalSupplies = 0
+    for (let item in roomKeys) {
+      totalSupplies += placeKeys[item].value * roomKeys[item].value
+    }
+    return Number(totalSupplies.toFixed(1))
+  }
+  function getTotalRooms(newObject, selectAreas, placeKeys) {
+    let totalPlace = 0
+    if (selectAreas.toString().includes('Bedrooms')) {
+      totalPlace += Number(newObject.bedrooms)
+      placeKeys['bedrooms'].value = Number(newObject.bedrooms)
+    }
+    if (selectAreas.toString().includes('Bathrooms')) {
+      totalPlace += Number(newObject.bathrooms)
+      placeKeys['bathrooms'].value = Number(newObject.bathrooms)
+    }
+    if (selectAreas.toString().includes('Living Rooms')) {
+      totalPlace += Number(newObject.livingRooms)
+      placeKeys['livingRooms'].value = Number(newObject.livingRooms)
+    }
+    if (selectAreas.toString().includes('Family')) {
+      totalPlace += Number(newObject.familyRooms)
+      placeKeys['familyRooms'].value = Number(newObject.familyRooms)
+    }
+    if (selectAreas.toString().includes('Dining')) {
+      totalPlace += Number(newObject.diningRooms)
+      placeKeys['diningRooms'].value = Number(newObject.diningRooms)
+    }
+    if (selectAreas.toString().includes('Kitchens')) {
+      totalPlace += Number(newObject.kitchens)
+      placeKeys['kitchens'].value = Number(newObject.kitchens)
+    }
+    if (selectAreas.toString().includes('Hallway')) {
+      totalPlace += Number(newObject.hallways)
+      placeKeys['hallways'].value = Number(newObject.hallways)
+    }
+    if (selectAreas.toString().includes('Stairwell')) {
+      totalPlace += Number(newObject.stairwells)
+      placeKeys['stairwells'].value = Number(newObject.stairwells)
+    }
+    if (selectAreas.toString().includes('Foyer')) {
+      totalPlace += Number(newObject.foyers)
+      placeKeys['foyers'].value = Number(newObject.foyers)
+    }
+    if (selectAreas.toString().includes('Office')) {
+      totalPlace += Number(newObject.offices)
+      placeKeys['offices'].value = Number(newObject.offices)
+    }
+    if (selectAreas.toString().includes('Den')) {
+      totalPlace += Number(newObject.dens)
+      placeKeys['dens'].value = Number(newObject.dens)
+    }
+    if (selectAreas.toString().includes('Basement')) {
+      totalPlace += Number(newObject.basement)
+      placeKeys['basement'].value = Number(newObject.basement)
+    }
+    return totalPlace
+  }
   return {
     newObject,
     totalRooms,
@@ -409,65 +469,7 @@ const normalizeData = async (answers) => {
     totalSuppliesObject,
   }
 }
-function calculateTotalSupplies(placeKeys) {
-  let totalSupplies = 0
-  for (let item in roomKeys) {
-    totalSupplies += placeKeys[item].value * roomKeys[item].value
-  }
-  return Number(totalSupplies.toFixed(1))
-}
-function getTotalRooms(newObject, selectAreas, placeKeys) {
-  let totalPlace = 0
-  if (selectAreas.toString().includes('Bedrooms')) {
-    totalPlace += Number(newObject.bedrooms)
-    placeKeys['bedrooms'].value = Number(newObject.bedrooms)
-  }
-  if (selectAreas.toString().includes('Bathrooms')) {
-    totalPlace += Number(newObject.bathrooms)
-    placeKeys['bathrooms'].value = Number(newObject.bathrooms)
-  }
-  if (selectAreas.toString().includes('Living Rooms')) {
-    totalPlace += Number(newObject.livingRooms)
-    placeKeys['livingRooms'].value = Number(newObject.livingRooms)
-  }
-  if (selectAreas.toString().includes('Family')) {
-    totalPlace += Number(newObject.familyRooms)
-    placeKeys['familyRooms'].value = Number(newObject.familyRooms)
-  }
-  if (selectAreas.toString().includes('Dining')) {
-    totalPlace += Number(newObject.diningRooms)
-    placeKeys['diningRooms'].value = Number(newObject.diningRooms)
-  }
-  if (selectAreas.toString().includes('Kitchens')) {
-    totalPlace += Number(newObject.kitchens)
-    placeKeys['kitchens'].value = Number(newObject.kitchens)
-  }
-  if (selectAreas.toString().includes('Hallway')) {
-    totalPlace += Number(newObject.hallways)
-    placeKeys['hallways'].value = Number(newObject.hallways)
-  }
-  if (selectAreas.toString().includes('Stairwell')) {
-    totalPlace += Number(newObject.stairwells)
-    placeKeys['stairwells'].value = Number(newObject.stairwells)
-  }
-  if (selectAreas.toString().includes('Foyer')) {
-    totalPlace += Number(newObject.foyers)
-    placeKeys['foyers'].value = Number(newObject.foyers)
-  }
-  if (selectAreas.toString().includes('Office')) {
-    totalPlace += Number(newObject.offices)
-    placeKeys['offices'].value = Number(newObject.offices)
-  }
-  if (selectAreas.toString().includes('Den')) {
-    totalPlace += Number(newObject.dens)
-    placeKeys['dens'].value = Number(newObject.dens)
-  }
-  if (selectAreas.toString().includes('Basement')) {
-    totalPlace += Number(newObject.basement)
-    placeKeys['basement'].value = Number(newObject.basement)
-  }
-  return totalPlace
-}
+
 module.exports = {
   normalizeData,
 }

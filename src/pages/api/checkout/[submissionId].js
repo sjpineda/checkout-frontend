@@ -11,6 +11,7 @@ import { repairingTrim } from '../../../../utils/hours/repairingTrim'
 import { getDescriptions, getJobDescription } from '../../../../utils/getDescriptions'
 import { getConstants } from '../../../../utils/constants/descriptions'
 import { getPropertyDescriptions } from '../../../../utils/getPropertyDescription'
+import { calculateCosts, calculateTotalHours } from '../../../../utils/calculateCosts'
 const apiKey = process.env.JOTFORM_API_KEY
 
 export default async function getCheckout(req, res) {
@@ -18,7 +19,7 @@ export default async function getCheckout(req, res) {
   const url = `${process.env.JOTFORM_BASE_URL}/submission/${submissionId}?apiKey=${apiKey}`
   const response = await Network.get(url)
   const answers = response.content.answers
-  console.log('answers', answers)
+  // console.log('answers', answers)
   let {
     newObject,
     totalRoomSupplies,
@@ -84,21 +85,32 @@ export default async function getCheckout(req, res) {
   console.log('repairingWallsCost', repairingWallsCost)
   console.log('paintingCeilingCost', paintingCeilingCost)
   const totalSumMaterials = materialCosts(newObject, totalRoomSupplies, objectTotal, baseboardKeys)
-  const totalHours =
-    coveringFurnitureCost +
-    primingCost +
-    paintingWallsCost +
-    paintingTrimCost +
-    repairingWallsCost +
-    repairingCeilingCost +
-    repairingTrimCost +
+  // const totalHours =
+  //   coveringFurnitureCost +
+  //   primingCost +
+  //   paintingWallsCost +
+  //   paintingTrimCost +
+  //   repairingWallsCost +
+  //   repairingCeilingCost +
+  //   repairingTrimCost +
+  //   paintingCeilingCost
+  const totalHours = calculateTotalHours(
+    coveringFurnitureCost,
+    primingCost,
+    paintingWallsCost,
+    paintingTrimCost,
+    repairingWallsCost,
+    repairingCeilingCost,
+    repairingTrimCost,
     paintingCeilingCost
+  )
   // console.log('totalHours', totalHours)
   const daysOfWork = Math.round(totalHours / 8)
-  const labourCost = totalHours < 8 ? 450 : totalHours * 28
+  // const labourCost = totalHours < 8 ? 450 : totalHours * 28
+  const { labourCost, totalOfCosts } = calculateCosts(totalHours, totalSumMaterials)
   console.log('totalHours', totalHours)
   console.log('labourCost', labourCost)
-  const totalOfCosts = totalSumMaterials + labourCost
+  // const totalOfCosts = totalSumMaterials + labourCost
   console.log('totalSumMaterials', totalSumMaterials)
   console.log('totalOfCosts', totalOfCosts)
   const contigency = totalOfCosts * 0.05
@@ -106,7 +118,7 @@ export default async function getCheckout(req, res) {
   let finalPrice = ((totalOfCosts + contigency) / 0.57).toFixed(2)
   console.log('finalPrice', Number(finalPrice))
   // finalPrice = ((Number(finalPrice) * 0.07).toFixed(2) + finalPrice).toLocaleString()
-  finalPrice = ((Number(finalPrice )* 0.07) + Number(finalPrice)).toFixed(2)
+  finalPrice = (Number(finalPrice) * 0.07 + Number(finalPrice)).toFixed(2)
   const ccExtraCharge = finalPrice * 0.03
   const profit = finalPrice - totalOfCosts - contigency - ccExtraCharge
   const profitPercentage = (profit / finalPrice) * 100
