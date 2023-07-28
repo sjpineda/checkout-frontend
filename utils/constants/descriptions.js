@@ -216,8 +216,7 @@ export async function getConstants(newObject, totalRoomSupplies, totalCrownMoldi
   if (newObject.whichAreasCM.toString() === 'All areas') {
     crownMoldingService =
       totalCrownMolding > 0
-        ? `Crown Molding in the following areas
-          ${Number(newObject.bedrooms) !== 0 ? 'Bedrooms' : ''} ${
+        ? `Crown Molding in the following areas ${Number(newObject.bedrooms) !== 0 ? 'Bedrooms' : ''} ${
             Number(newObject.bathrooms) !== 0 ? 'Bathrooms' : ''
           } ${Number(newObject.livingRooms) !== 0 ? 'Living Rooms' : ''} ${
             Number(newObject.diningRooms) !== 0 ? 'Dining Rooms' : ''
@@ -281,16 +280,22 @@ export async function getConstants(newObject, totalRoomSupplies, totalCrownMoldi
         : ''
   }
 
-  let noPaint = ''
-  if (totalRoomSupplies === 0) {
-    noPaint = 'No Walls - No Ceiling - No Baseboards'
+  let noPaint = '\n'
+if(objectTotal.totalBaseboards ===0){
+  noPaint += 'No baseboards required '
+}
+  if (objectTotal.totalCrownMolding === 0) {
+    noPaint += '-No crown molding required '
   }
-  if (totalCrownMolding === 0) {
-    noPaint = 'No crown molding required'
+  if (objectTotal.totalWalls === 0) {
+    noPaint += '-No walls '
+  }
+  if (objectTotal.totalCeiling === 0) {
+    noPaint += '-No ceilings'
   }
   let doorWithFrame =
     Number(newObject.numberOfDoorFrames) > 0
-      ? `- ${newObject.numberOfDoorFrames} Door frames`
+      ? `\n- ${newObject.numberOfDoorFrames} Door frames`
       : '- NO DOOR FRAMES'
   let windowWithFrame =
     Number(newObject.numberOfWindowFrames) > 0
@@ -305,17 +310,20 @@ export async function getConstants(newObject, totalRoomSupplies, totalCrownMoldi
       ? ` - ${newObject.numberOfDoorWithFrames} Doors with frames`
       : ' NO DOORS WITH FRAMES'
   let notesByClients = '\n* Notes (info provided by client): '
-  if (newObject.currentWallFinish.toString().includes('Matte')) {
-    notesByClients += '\n Current finish is Matte'
-  } else {
-    notesByClients += '\n Current finish is Gloss '
+  if (objectTotal.totalWalls > 0) {
+    if (newObject.currentWallFinish.toString().includes('Matte')) {
+      notesByClients += '\n Current finish is Matte'
+    } else {
+      notesByClients += '\n Current finish is Gloss '
+    }
+    notesByClients += ' and new finish is '
+    if (newObject.desiredWallFinish.toString().includes('Matte')) {
+      notesByClients += 'Matte.'
+    } else {
+      notesByClients += 'Gloss.'
+    }
   }
-  notesByClients += ' and new finish is '
-  if (newObject.desiredWallFinish.toString().includes('Matte')) {
-    notesByClients += 'Matte.'
-  } else {
-    notesByClients += 'Gloss.'
-  }
+
   let approx = ''
 
   notesByClients += ` ${
@@ -335,8 +343,15 @@ export async function getConstants(newObject, totalRoomSupplies, totalCrownMoldi
   if (newObject.changeTrimColor.toString().includes('Keep the same')) {
     approx += 'Trim will keep the same or similar color'
   } else {
-    approx += `Approx ${newObject.numberRoomsTrimLightToDark} areas will
-     change the trim to a darker color. Approx ${newObject.numberRoomsTrimDarkToLight} areas will change the trim to a lighter color`
+    approx += `${
+      newObject.numberRoomsTrimLightToDark > 0
+        ? `Approx ${newObject.numberRoomsTrimLightToDark} areas will change the trim to a darker color.`
+        : ''
+    }  ${
+      newObject.numberRoomsTrimDarkToLight > 0
+        ? `Approx ${newObject.numberRoomsTrimDarkToLight} areas will change the trim to a lighter color`
+        : ''
+    } `
   }
 
   let propertyCondition = `\nThis property is  ${
@@ -353,6 +368,8 @@ export async function getConstants(newObject, totalRoomSupplies, totalCrownMoldi
   }
   if (newObject.tenFeetWall.toString().toLowerCase().includes('yes')) {
     exceedHeight = `\n- ${newObject.anyCeilingsTenFeet} rooms exceed the standard height`
+  }else{
+    exceedHeight = `\n- Standard height`
   }
   if (newObject.wallpaperRemoval.toString().toLowerCase().includes('yes')) {
     wallPaperRemoval = `\n- ${newObject.wallpaperRooms} walls need wallpaper removal`
