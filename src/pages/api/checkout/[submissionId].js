@@ -84,7 +84,7 @@ export default async function getCheckout(req, res) {
   console.log('repairingTrimCost', repairingTrimCost)
   console.log('repairingWallsCost', repairingWallsCost)
   console.log('paintingCeilingCost', paintingCeilingCost)
-  const totalSumMaterials = materialCosts(newObject, totalRoomSupplies, objectTotal, baseboardKeys)
+  const totalSumMaterials = await materialCosts(newObject, totalRoomSupplies, objectTotal, baseboardKeys)
   // const totalHours =
   //   coveringFurnitureCost +
   //   primingCost +

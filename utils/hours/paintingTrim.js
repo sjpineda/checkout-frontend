@@ -26,6 +26,11 @@ export const paintingTrimHours = (
   const windows = object.numberOfWindowFrames * 0.35
   const closets = object.numberOfClosets * 0.5
 
+  console.log('trimBaseBoardCrown', trimBaseBoardCrown)
+  console.log('trimExtraCoat', trimExtraCoat)
+  console.log('doorsAndFrames', doorsAndFrames)
+  console.log('windows', windows)
+  console.log('closets', closets)
   return parseFloat(
     (trimBaseBoardCrown + trimExtraCoat + doorsAndFrames + windows + closets).toFixed(2)
   )

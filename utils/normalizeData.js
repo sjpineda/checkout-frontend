@@ -346,7 +346,7 @@ const normalizeData = async (answers) => {
   }
   if (newObject.whichAreasCM.toString().includes('All areas')) {
     objectTotal.totalCrownMolding = totalRoomSupplies
-    totalSuppliesObject.totalSuppliesWall = totalRoomSupplies
+    totalSuppliesObject.totalSuppliesCrownMolding = totalRoomSupplies
   } else {
     objectTotal.totalCrownMolding = getTotalRooms(
       newObject,

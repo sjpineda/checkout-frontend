@@ -28,7 +28,7 @@ const materialCostsKeyValues = [
   ['Other Costs', { amount: 0, modifier: 0.05, totalCost: 0 }],
 ]
 let amountOfMaterialsMap = new Map(materialCostsKeyValues)
-export function materialCosts(object, totalRoomSupplies, objectTotal, baseboardKeys) {
+export async function materialCosts(object, totalRoomSupplies, objectTotal, baseboardKeys) {
   if (object?.conditionOfTheWalls !== 0) {
     if (object?.conditionOfTheWalls?.toString().includes('Damaged')) {
       const getObject = amountOfMaterialsMap.get('Drywall sheets')
@@ -108,44 +108,44 @@ export function materialCosts(object, totalRoomSupplies, objectTotal, baseboardK
 
   let totalSum = 0
   if (object.paintProvided.toString().includes('Yes')) {
+
     if (Number(object.numberRoomsTrimLightToDark) > 0) {
       totalSum = Math.round(
         Number(objectTotal.totalBaseboards) * 0.2 +
           Number(objectTotal.totalCrownMolding) * 0.2 +
-          isNaN(Number(object.numberOfDoorWithFrames))
+        (isNaN(Number(object.numberOfDoorWithFrames))
           ? 0
-          : Number(object.numberOfDoorWithFrames) * 0.1 +
-            isNaN(Number(object.NumberofWindowsFrames))
+          : Number(object.numberOfDoorWithFrames) * 0.1) +
+        ( isNaN(Number(object.numberOfWindowFrames))
           ? 0
-          : Number(object.NumberofWindowsFrames) * 0.1 + isNaN(Number(object.numberOfClosets))
+          : Number(object.numberOfWindowFrames) * 0.1) + (isNaN(Number(object.numberOfClosets))
           ? 0
-          : Number(object.numberOfClosets) * 0.1 + isNaN(Number(object.numberOfDoorFrames))
+          : Number(object.numberOfClosets) * 0.1) + (isNaN(Number(object.numberOfDoorFrames))
           ? 0
-          : Number(object.numberOfDoorFrames) * 0.1 +
-            isNaN(Number(object.numberRoomsTrimLightToDark))
+          : Number(object.numberOfDoorFrames) * 0.1 )+
+        (isNaN(Number(object.numberRoomsTrimLightToDark))
           ? 0
-          : Number(object.numberRoomsTrimLightToDark) * 0.6
+          : Number(object.numberRoomsTrimLightToDark) * 0.6)
       )
     } else {
       if (Number(object.numberRoomsTrimDarkToLight) > 0) {
-        console.log('got HEREEE')
 
         totalSum = Math.round(
           Number(objectTotal.totalBaseboards) * 0.2 +
             Number(objectTotal.totalCrownMolding) * 0.2 +
-            isNaN(Number(object.numberOfDoorWithFrames))
+          (isNaN(Number(object.numberOfDoorWithFrames))
             ? 0
-            : Number(object.numberOfDoorWithFrames) * 0.1 +
-              isNaN(Number(object.NumberofWindowsFrames))
+            : Number(object.numberOfDoorWithFrames) * 0.1) +
+          (isNaN(Number(object.NumberofWindowsFrames))
             ? 0
-            : Number(object.NumberofWindowsFrames) * 0.1 + isNaN(Number(object.numberOfClosets))
+            : Number(object.NumberofWindowsFrames) * 0.1) + (isNaN(Number(object.numberOfClosets))
             ? 0
-            : Number(object.numberOfClosets) * 0.1 + isNaN(Number(object.numberOfDoorFrames))
+            : Number(object.numberOfClosets) * 0.1) + (isNaN(Number(object.numberOfDoorFrames))
             ? 0
-            : Number(object.numberOfDoorFrames) * 0.1 +
-              isNaN(Number(object.numberRoomsTrimDarkToLight))
+            : Number(object.numberOfDoorFrames) * 0.1 )+
+          (isNaN(Number(object.numberRoomsTrimDarkToLight))
             ? 0
-            : Number(object.numberRoomsTrimDarkToLight) * 0.3
+            : Number(object.numberRoomsTrimDarkToLight) * 0.3)
         )
       } else {
         totalSum += Math.round(
@@ -159,13 +159,7 @@ export function materialCosts(object, totalRoomSupplies, objectTotal, baseboardK
         )
       }
     }
-    // console.log('totalRoomSupplies', totalRoomSupplies)
-    // console.log(typeof object.numberOfDoorWithFrames)
-    // console.log('object. numberOfDoorWithFrames', object.numberOfDoorWithFrames)
-    // console.log(typeof object.numberOfWindowFrames)
-    // console.log('object.NumberofWindowsFrames', object.numberOfWindowFrames)
-    // console.log(typeof object.numberOfClosets)
-    // console.log('object. numberOfClosets', object.numberOfClosets)
+
 
     const getObject = amountOfMaterialsMap.get('Trim Paint (Semi-Gloss)')
     getObject.amount = totalSum
@@ -225,14 +219,12 @@ export function materialCosts(object, totalRoomSupplies, objectTotal, baseboardK
       totalSumWallsPaintFinish = 0
     } else {
       if (object.desiredWallFinish.toString().includes('Matte')) {
-        console.log('got matte')
         totalSumWallsPaintFinish = (totalSumWallsPaintFirst + totalSumWallsPaintColorChange) * 0.1
       } else {
         console.log('got semi')
         totalSumWallsPaintFinish = (totalSumWallsPaintFirst + totalSumWallsPaintColorChange) * 0.3
       }
     }
-    console.log('before nan', totalSumWallsPaintFinish)
     totalSumWallsPaintFinish = Math.round(totalSumWallsPaintFinish)
     const getObject3 = amountOfMaterialsMap.get('Walls Paint (Finish Coat)')
     getObject3.amount = totalSumWallsPaintFinish
@@ -244,10 +236,6 @@ export function materialCosts(object, totalRoomSupplies, objectTotal, baseboardK
     totalCostSum += value.totalCost
   }
   totalCostSum += Math.floor(totalCostSum * 0.05)
-  // totalCostSum = (totalCostSum / 10) * 10
-  console.log('totalCostSum', totalCostSum)
-  console.log('what is this', (totalCostSum / 10) * 10)
-  console.log('plss', Math.floor(totalCostSum * 0.05))
-  console.log('hello', amountOfMaterialsMap)
+
   return totalCostSum
 }
