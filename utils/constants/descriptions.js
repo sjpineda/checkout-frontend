@@ -9,11 +9,15 @@ export async function getConstants(newObject, totalRoomSupplies, totalCrownMoldi
       : 'surface(s), floors with drop cloths and plastic sheets where necessary'
   } `
   if (totalRoomSupplies > 0) {
-    serViceIncludes += `\n ${objectTotal.totalWalls > 0 ? '-Walls ' : ''} ${objectTotal.totalCeilings > 0 ? '-Ceiling ' : ' '}`
+    serViceIncludes += `\n ${objectTotal.totalWalls > 0 ? '-Walls ' : ''} ${
+      objectTotal.totalCeilings > 0 ? '-Ceiling ' : ' '
+    }`
   }
   if (
+    objectTotal.totalWalls > 0 ||
     objectTotal.totalCrownMolding > 0 ||
     objectTotal.totalBaseboards > 0 ||
+    objectTotal.totalCeilings > 0 ||
     Number(newObject.numberOfWindowFrames) > 0 ||
     Number(newObject.numberOfClosets) > 0
   ) {
@@ -50,20 +54,23 @@ export async function getConstants(newObject, totalRoomSupplies, totalCrownMoldi
     considering += ` - Trim ${commonStrings.damagedCondition}`
   }
 
-  let paintingService = `\n-Painting service for: \nWalls in the following areas:  ${
-    Number(newObject.bedrooms) !== 0 ? `${newObject.bedrooms} Bedrooms` : ''
-  } ${Number(newObject.bathrooms) !== 0 ? `${newObject.bathrooms} Bathrooms` : ''} ${
-    Number(newObject.livingRooms) !== 0 ? `${newObject.livingRooms} Living Rooms` : ''
-  } ${Number(newObject.diningRooms) !== 0 ? ` ${newObject.diningRooms} Dining Rooms` : ''} ${
-    Number(newObject.kitchens) !== 0 ? `${newObject.kitchens} Kitchens` : ''
-  } ${Number(newObject.hallways) !== 0 ? `${newObject.hallways} Hallways` : ''} ${
-    Number(newObject.stairwells) !== 0 ? ` ${newObject.stairwells} Stairwells` : ''
-  } ${Number(newObject.foyers) !== 0 ? ` ${newObject.foyers} Foyers` : ''} ${
-    Number(newObject.offices) !== 0 ? `${newObject.offices} Offices` : ''
-  } ${Number(newObject.familyRooms) !== 0 ? `${newObject.familyRooms} Family Rooms` : ''} ${
-    Number(newObject.basement) !== 0 ? `${newObject.basement} Basement` : ''
-  }
-    `
+  let paintingService = `\n-Painting service for: ${
+    objectTotal.totalWalls > 0
+      ? `\n-Walls in the following areas:  ${
+          Number(newObject.bedrooms) !== 0 ? `${newObject.bedrooms} Bedrooms` : ''
+        } ${Number(newObject.bathrooms) !== 0 ? `${newObject.bathrooms} Bathrooms` : ''} ${
+          Number(newObject.livingRooms) !== 0 ? `${newObject.livingRooms} Living Rooms` : ''
+        } ${Number(newObject.diningRooms) !== 0 ? ` ${newObject.diningRooms} Dining Rooms` : ''} ${
+          Number(newObject.kitchens) !== 0 ? `${newObject.kitchens} Kitchens` : ''
+        } ${Number(newObject.hallways) !== 0 ? `${newObject.hallways} Hallways` : ''} ${
+          Number(newObject.stairwells) !== 0 ? ` ${newObject.stairwells} Stairwells` : ''
+        } ${Number(newObject.foyers) !== 0 ? ` ${newObject.foyers} Foyers` : ''} ${
+          Number(newObject.offices) !== 0 ? `${newObject.offices} Offices` : ''
+        } ${Number(newObject.familyRooms) !== 0 ? `${newObject.familyRooms} Family Rooms` : ''} ${
+          Number(newObject.basement) !== 0 ? `${newObject.basement} Basement` : ''
+        } `
+      : ''
+  } `
   let ceilingService = ''
   if (newObject.whichAreasCeilings.toString() === 'All areas') {
     ceilingService =
@@ -339,19 +346,19 @@ export async function getConstants(newObject, totalRoomSupplies, totalCrownMoldi
   let exceedHeight = ''
   let wallPaperRemoval = ''
   let removeDryWall = ''
-  if (newObject.paintProvided.toString().includes('Yes')) {
+  if (newObject.paintProvided.toString().toLowerCase().includes('yes')) {
     propertyCondition += '\n- Paint and Supplies included'
   } else {
     propertyCondition += '\n- Paint Provided by Client'
   }
-  if (!newObject.tenFeetWall.toString().includes('No')) {
+  if (newObject.tenFeetWall.toString().toLowerCase().includes('yes')) {
     exceedHeight = `\n- ${newObject.anyCeilingsTenFeet} rooms exceed the standard height`
   }
-  if (newObject.wallpaperRemoval === 'YES') {
+  if (newObject.wallpaperRemoval.toString().toLowerCase().includes('yes')) {
     wallPaperRemoval = `\n- ${newObject.wallpaperRooms} walls need wallpaper removal`
   }
 
-  if (newObject.anyRoomRawDrywall !== 'No') {
+  if (newObject.anyRoomRawDrywall.toString().toLowerCase() === 'yes') {
     removeDryWall = `\n- ${newObject.dryWallRooms} rooms have raw drywall`
   }
   let propertyDescription =

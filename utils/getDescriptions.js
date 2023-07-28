@@ -11,7 +11,7 @@ const keysForProperties = [
   'foyers',
   'offices',
 ]
-export  const getDescriptions = (newObject) => {
+export const getDescriptions = (newObject) => {
   let propertyDescription = ''
   for (let i = 0; i < keysForProperties.length; i++) {
     if (Number(newObject[keysForProperties[i]]) !== 0) {
@@ -25,21 +25,21 @@ export  const getDescriptions = (newObject) => {
   return propertyDescription.slice(0, -2)
 }
 
-export  const getJobDescription = async (newObject ,objectTotal) => {
-  let jobDescription = 'Painting service for walls'
+export const getJobDescription = async (newObject, objectTotal) => {
+  let jobDescription = `Painting service for ${objectTotal.totalWalls > 0 ? 'walls, ' : ''}`
   if (newObject.paintCeilings.toString() === 'Yes') {
-    jobDescription += ', and ceilings'
+    jobDescription += 'ceilings'
   }
-  if (objectTotal.totalBaseboards >0) {
+  if (objectTotal.totalBaseboards > 0) {
     jobDescription += ', baseboards,'
   }
-  if (objectTotal.totalCrownMolding >0) {
+  if (objectTotal.totalCrownMolding > 0) {
     jobDescription += ' crown molding,'
   }
   console.log('nt]ot na', jobDescription)
   const whatpaint = newObject.whatToPaint.toString().toLowerCase().replace(/;/g, ',')
   console.log('whatpaint', whatpaint)
-  jobDescription += ` ${whatpaint}`
+  jobDescription += `, ${whatpaint}`
   jobDescription += ' according to the instructions provided by the client'
   // jobDescription += ' ' + newObject.Paintthefollowingtrim
   // jobDescription += `  in ${newObject.bedrooms} bedrooms  ${newObject.bathrooms}  bathrooms ${newObject.livingRooms}
