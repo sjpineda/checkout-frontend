@@ -93,7 +93,7 @@ export async function getConstants(newObject, totalRoomSupplies, totalCrownMoldi
   } else {
     ceilingService =
       objectTotal.totalCeilings > 0
-        ? `-Ceiling in the following areas  ${
+        ? `\n-Ceiling in the following areas  ${
             newObject.selectAreasCeilings.toString().includes('Bedrooms')
               ? `${newObject.bedrooms} Bedrooms`
               : ''
