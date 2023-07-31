@@ -280,7 +280,7 @@ export async function getConstants(newObject, totalRoomSupplies, totalCrownMoldi
         : ''
   }
 
-  let noPaint = '\n'
+  let noPaint = ''
 if(objectTotal.totalBaseboards ===0){
   noPaint += 'No baseboards required '
 }
@@ -357,14 +357,14 @@ if(objectTotal.totalBaseboards ===0){
   let propertyCondition = `\nThis property is  ${
     Number(newObject.furnishedRange) === 0 ? newObject.propertyIs : newObject.furnishedRange
   } 
-   Paint: ${newObject.brandOfPaint}`
+ ${newObject.brandOfPaint !== 0? `Paint: ${newObject.brandOfPaint} `: ''}`
   let exceedHeight = ''
   let wallPaperRemoval = ''
   let removeDryWall = ''
   if (newObject.paintProvided.toString().toLowerCase().includes('yes')) {
     propertyCondition += '\n- Paint and Supplies included'
   } else {
-    propertyCondition += '\n- Paint Provided by Client'
+    propertyCondition += '- Paint Provided by Client'
   }
   if (newObject.tenFeetWall.toString().toLowerCase().includes('yes')) {
     exceedHeight = `\n- ${newObject.anyCeilingsTenFeet} rooms exceed the standard height`
