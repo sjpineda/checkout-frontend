@@ -22,7 +22,8 @@ export async function getConstants(newObject, totalRoomSupplies, totalCrownMoldi
     Number(newObject.numberOfClosets) > 0
   ) {
     serViceIncludes +=
-      '-Trim, surface preparation for paint (Repairing and sanding localized areas Cracks and nail holes will be filled where necessary) '
+
+      `${newObject.includeTrimOptions === 'No' ? '': '-Trim'} surface preparation for paint (Repairing and sanding localized areas Cracks and nail holes will be filled where necessary)`
   }
   let considering = '\n-Considering: '
   if (newObject.conditionOfTheWalls?.toString().includes('Good')) {
@@ -367,9 +368,9 @@ if(objectTotal.totalBaseboards ===0){
     propertyCondition += '- Paint Provided by Client'
   }
   if (newObject.tenFeetWall.toString().toLowerCase().includes('yes')) {
-    exceedHeight = `\n- ${newObject.anyCeilingsTenFeet} rooms exceed the standard height`
+    exceedHeight = `- ${newObject.anyCeilingsTenFeet} rooms exceed the standard height`
   }else{
-    exceedHeight = `\n- Standard height`
+    exceedHeight = `- Standard height`
   }
   if (newObject.wallpaperRemoval.toString().toLowerCase().includes('yes')) {
     wallPaperRemoval = `\n- ${newObject.wallpaperRooms} walls need wallpaper removal`

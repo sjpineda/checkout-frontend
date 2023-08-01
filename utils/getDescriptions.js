@@ -36,10 +36,9 @@ export const getJobDescription = async (newObject, objectTotal) => {
   if (objectTotal.totalCrownMolding > 0) {
     jobDescription += ' crown molding,'
   }
-  console.log('nt]ot na', jobDescription)
   const whatpaint = newObject.whatToPaint.toString().toLowerCase().replace(/;/g, ',')
   console.log('whatpaint', whatpaint)
-  jobDescription += `, ${whatpaint}`
+  jobDescription += `, ${whatpaint > 0 ? whatpaint : ''}`
   jobDescription += ' according to the instructions provided by the client'
   // jobDescription += ' ' + newObject.Paintthefollowingtrim
   // jobDescription += `  in ${newObject.bedrooms} bedrooms  ${newObject.bathrooms}  bathrooms ${newObject.livingRooms}
