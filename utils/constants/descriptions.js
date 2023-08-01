@@ -368,9 +368,9 @@ if(objectTotal.totalBaseboards ===0){
     propertyCondition += '- Paint Provided by Client'
   }
   if (newObject.tenFeetWall.toString().toLowerCase().includes('yes')) {
-    exceedHeight = `- ${newObject.anyCeilingsTenFeet} rooms exceed the standard height`
+    exceedHeight = `\n - ${newObject.anyCeilingsTenFeet} rooms exceed the standard height`
   }else{
-    exceedHeight = `- Standard height`
+    exceedHeight = `\n - Standard height`
   }
   if (newObject.wallpaperRemoval.toString().toLowerCase().includes('yes')) {
     wallPaperRemoval = `\n- ${newObject.wallpaperRooms} walls need wallpaper removal`
