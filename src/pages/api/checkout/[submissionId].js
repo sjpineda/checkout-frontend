@@ -113,7 +113,8 @@ export default async function getCheckout(req, res) {
   // const totalOfCosts = totalSumMaterials + labourCost
   console.log('totalSumMaterials', totalSumMaterials)
   console.log('totalOfCosts', totalOfCosts)
-  const contigency = totalOfCosts * 0.05
+  // const contigency = totalOfCosts * 0.05
+  const contigency = Number(newObject.colorsForWalls) > 1? totalOfCosts*0.1 : totalOfCosts*0.05
   console.log('contigency', contigency)
   let finalPrice = ((totalOfCosts + contigency) / 0.57).toFixed(2)
   console.log('finalPrice', Number(finalPrice))
