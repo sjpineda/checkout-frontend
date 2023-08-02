@@ -363,7 +363,7 @@ if(objectTotal.totalBaseboards ===0){
   let wallPaperRemoval = ''
   let removeDryWall = ''
   if (newObject.paintProvided.toString().toLowerCase().includes('yes')) {
-    propertyCondition += '\n- Paint and Supplies included'
+    propertyCondition += '\n* Paint and Supplies included'
   } else {
     propertyCondition += '- Paint Provided by Client'
   }

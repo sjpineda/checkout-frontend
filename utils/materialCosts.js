@@ -236,6 +236,7 @@ export async function materialCosts(object, totalRoomSupplies, objectTotal, base
     totalCostSum += value.totalCost
   }
   totalCostSum += Math.floor(totalCostSum * 0.05)
-
+  console.log('amountOfMaterialsMap', amountOfMaterialsMap)
+console.log('totalCostSum', totalCostSum)
   return totalCostSum
 }

@@ -67,7 +67,8 @@ function Quotes() {
       color: 'rgba(255, 255, 255, .8)',
     },
     rightContent: {
-      border: '1px solid #f2f2f2',
+      border: '1px solid #ccc',
+      borderRadius: '10px',
       maxHeight: '80vh',
       overflowY: 'scroll',
       padding: '15px 0',
@@ -89,7 +90,7 @@ function Quotes() {
   }
 
   const borderCardStyle = {
-    card: { border: '1px solid #ccc', padding: '20px', margin: '20px 0' },
+    card: { border: '1px solid #ccc', borderRadius: '30px', padding: '20px', margin: '20px 0' },
     cardTitle: { fontSize: '16px', fontWeight: '700', margin: '0' },
     desc: { fontSize: '14px',},
   }
@@ -159,7 +160,7 @@ function Quotes() {
                             </p>
                             <p style={style.prtBannerText} className="text-nowrap">
                               <span className="mx-2 font-weight-bold">Quote expires:</span>
-                              {quotesData?.finalResult?.userInfo?.quoteCreatedAt}
+                              {quotesData?.finalResult?.userInfo?.quoteExpiredAt}
                             </p>
                             <p style={style.prtBannerText} className="text-nowrap">
                               <span className="mx-2 font-weight-bold">Quote created by:</span>
@@ -180,9 +181,13 @@ function Quotes() {
                             {quotesData?.finalResult?.userInfo?.comments}
                           </p>
                         </div>
-                        <p style={borderCardStyle.desc}>
-                          <strong>Address</strong> {quotesData?.finalResult?.userInfo?.address}
-                        </p>
+
+                        <div className="d-grid gap-2">
+                          <h3 style={borderCardStyle.cardTitle}>Address</h3>
+                          <p style={borderCardStyle.desc}>
+                             {quotesData?.finalResult?.userInfo?.address}
+                          </p>
+                        </div>
                         <div className="d-grid gap-2">
                           <h3 style={borderCardStyle.cardTitle}>Property Description</h3>
                           <p style={borderCardStyle.desc}>

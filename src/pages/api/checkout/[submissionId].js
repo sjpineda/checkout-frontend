@@ -84,7 +84,12 @@ export default async function getCheckout(req, res) {
   console.log('repairingTrimCost', repairingTrimCost)
   console.log('repairingWallsCost', repairingWallsCost)
   console.log('paintingCeilingCost', paintingCeilingCost)
-  const totalSumMaterials = await materialCosts(newObject, totalRoomSupplies, objectTotal, baseboardKeys)
+  const totalSumMaterials = await materialCosts(
+    newObject,
+    totalRoomSupplies,
+    objectTotal,
+    baseboardKeys
+  )
   // const totalHours =
   //   coveringFurnitureCost +
   //   primingCost +
@@ -114,7 +119,7 @@ export default async function getCheckout(req, res) {
   console.log('totalSumMaterials', totalSumMaterials)
   console.log('totalOfCosts', totalOfCosts)
   // const contigency = totalOfCosts * 0.05
-  const contigency = Number(newObject.colorsForWalls) > 1? totalOfCosts*0.1 : totalOfCosts*0.05
+  const contigency = Number(newObject.colorsForWalls) > 1 ? totalOfCosts * 0.1 : totalOfCosts * 0.05
   console.log('contigency', contigency)
   let finalPrice = ((totalOfCosts + contigency) / 0.57).toFixed(2)
   console.log('finalPrice', Number(finalPrice))
@@ -123,6 +128,19 @@ export default async function getCheckout(req, res) {
   const ccExtraCharge = finalPrice * 0.03
   const profit = finalPrice - totalOfCosts - contigency - ccExtraCharge
   const profitPercentage = (profit / finalPrice) * 100
+  let quoteExpiredAt = new Date()
+  quoteExpiredAt.setDate(quoteExpiredAt.getDate() + 30)
+  quoteExpiredAt = quoteExpiredAt.toLocaleString('en-us', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  })
+
+  let quoteCreatedAt = new Date().toLocaleString('en-us', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  })
   const finalResult = {
     userInfo: {
       name: newObject.fullName,
@@ -130,11 +148,8 @@ export default async function getCheckout(req, res) {
       email: newObject.email,
       phoneNumber: newObject.phoneNumber,
       address: newObject.address,
-      quoteCreatedAt: new Date().toLocaleString('en-us', {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric',
-      }),
+      quoteCreatedAt: quoteCreatedAt,
+      quoteExpiredAt: quoteExpiredAt,
     },
     propertyDescription: propertyDescriptions,
     jobDescription: jobDescription,

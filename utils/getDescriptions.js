@@ -26,15 +26,15 @@ export const getDescriptions = (newObject) => {
 }
 
 export const getJobDescription = async (newObject, objectTotal) => {
-  let jobDescription = `Painting service for ${objectTotal.totalWalls > 0 ? 'walls, ' : ''}`
+  let jobDescription = `Painting service for ${objectTotal.totalWalls > 0 ? 'walls' : ''}`
   if (newObject.paintCeilings.toString() === 'Yes') {
-    jobDescription += 'ceilings'
+    jobDescription += ', ceilings'
   }
   if (objectTotal.totalBaseboards > 0) {
-    jobDescription += ', baseboards,'
+    jobDescription += ', baseboards'
   }
   if (objectTotal.totalCrownMolding > 0) {
-    jobDescription += ' crown molding,'
+    jobDescription += ', crown molding,'
   }
   const whatpaint = newObject.whatToPaint.toString().toLowerCase().replace(/;/g, ',')
   console.log('whatpaint', whatpaint)
