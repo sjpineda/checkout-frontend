@@ -176,9 +176,10 @@ function Quotes() {
                     <div style={borderCardStyle.card}>
                       <div className="d-grid gap-1">
                         <div className="d-grid gap-2">
-                          <h3 style={borderCardStyle.cardTitle}>Comment from</h3>
+                          <h3 style={borderCardStyle.cardTitle}>Comment from Sueep</h3>
                           <p style={borderCardStyle.desc}>
-                            {quotesData?.finalResult?.userInfo?.comments}
+                            {/*{quotesData?.finalResult?.userInfo?.comments}*/}
+
                           </p>
                         </div>
 
