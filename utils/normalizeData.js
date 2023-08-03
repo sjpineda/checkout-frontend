@@ -270,10 +270,9 @@ const normalizeData = async (answers) => {
       //   newObject[propertiesDictionary['address']] += obj.answer
       // }
       if (obj.text === 'Address') {
-        console.log("HEllO HELLo")
         let address = ''
         for (const property in obj.answer) {
-          address += ` ${obj.answer[property]},`
+          address += ` ${obj.answer[property]}`
         }
         address = address.replace(/,$/, '')
         newObject[propertiesDictionary[obj.name]] = address
