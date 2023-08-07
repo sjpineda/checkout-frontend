@@ -8,7 +8,6 @@
     "start": "next start",
     "lint": "next lint"
   },
-
   "browser": {
     "fs": false,
     "path": false,
@@ -45,6 +44,7 @@
     "react-loading-overlay": "^1.0.1",
     "react-select": "^5.7.0",
     "react-toastify": "^9.0.8",
+    "stripe": "^12.17.0",
     "tls": "^0.0.1",
     "webpack": "^5.75.0",
     "xlsx": "^0.18.5",

@@ -18,27 +18,17 @@ export default function PaymentCard(props) {
 
   useEffect(() => {
     fetch('https://valid.layercode.workers.dev/list/countries?format=select&flags=true&value=code')
-      .then((response) => response.json())
-      .then((data) => {
+      .then(response => response.json())
+      .then(data => {
         setCountries(data.countries)
         setSelectedCountry(data.userSelectValue)
       })
   }, [])
 
-  const handleSubmit = async (values) => {
-    setLoading(true)
-    let res = await axios.post(
-      `/api/authorizenet/create-payment?firstName=${props?.name}&lastName=${props?.phoneNumber}&cardNumber=${values.cardNumber}&expirationDate=${values.expirationDate}&cardCode=${values.cardCode}&id=${id}&amount=${props.amount}`
-    )
-    let { data } = res
-    setLoading(false)
-    if (data?.response.status) {
-      router.push({
-        pathname: '/success',
-        query: { returnUrl: router.asPath },
-      })
-      toast.success(data?.response?.description)
-    }
+  const handleSubmit = async values => {
+    const res = await fetch(`/api/prices/${props.quoteId}`)
+    const data = await res.json()
+    window.location.href = data.url
   }
 
   if (loading) {
@@ -61,7 +51,7 @@ export default function PaymentCard(props) {
         <Formik
           initialValues={InitialeState}
           // validationSchema={ValidateCardSchema}
-          onSubmit={(values) => {
+          onSubmit={values => {
             handleSubmit(values)
           }}>
           <Form>
@@ -88,62 +78,62 @@ export default function PaymentCard(props) {
               {/*    </svg>*/}
               {/*    <span className="text-danger mt-4"><ErrorMessage name="lastName" /></span>*/}
               {/*</div>*/}
-              <div className="col-12 mb-4">
-                <label htmlFor="cardnumber">Card Number</label>
-                <Field
-                  className="error"
-                  style={style.fieldHeight}
-                  id="cardnumber"
-                  type="text"
-                  name="cardNumber"
-                  maxLength={16}
-                  pattern="[0-9]*"
-                  inputMode="numeric"
-                />
-                <svg
-                  id="ccicon"
-                  className="ccicon"
-                  width="750"
-                  height="471"
-                  viewBox="0 0 750 471"
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlnsXlink="http://www.w3.org/1999/xlink"></svg>
-                <span className="text-danger mt-4">
-                  <ErrorMessage name="cardNumber" />
-                </span>
-              </div>
-              <div className="col-6 mb-4">
-                <label htmlFor="expirationdate">Expiration (mmyy)</label>
-                <Field
-                  style={style.fieldHeight}
-                  id="expirationdate"
-                  name="expirationDate"
-                  maxLength={4}
-                  type="text"
-                  pattern="[0-9]*"
-                  inputMode="numeric"
-                />
-                {/* <DatePicker id="example-datepicker" /> */}
-                <span className="text-danger mt-4">
-                  <ErrorMessage name="expirationDate" />
-                </span>
-              </div>
-              <div className="col-6 mb-4">
-                <label htmlFor="securitycode">Security Code</label>
-                <Field
-                  style={style.fieldHeight}
-                  id="securitycode"
-                  type="text"
-                  name="cardCode"
-                  pattern="[0-9]*"
-                  maxLength={3}
-                  inputMode="numeric"
-                />
-                <span className="text-danger mt-4">
-                  <ErrorMessage name="cardCode" />
-                </span>
-              </div>
+              {/*<div className="col-12 mb-4">*/}
+              {/*  <label htmlFor="cardnumber">Card Number</label>*/}
+              {/*  <Field*/}
+              {/*    className="error"*/}
+              {/*    style={style.fieldHeight}*/}
+              {/*    id="cardnumber"*/}
+              {/*    type="text"*/}
+              {/*    name="cardNumber"*/}
+              {/*    maxLength={16}*/}
+              {/*    pattern="[0-9]*"*/}
+              {/*    inputMode="numeric"*/}
+              {/*  />*/}
+              {/*  <svg*/}
+              {/*    id="ccicon"*/}
+              {/*    className="ccicon"*/}
+              {/*    width="750"*/}
+              {/*    height="471"*/}
+              {/*    viewBox="0 0 750 471"*/}
+              {/*    version="1.1"*/}
+              {/*    xmlns="http://www.w3.org/2000/svg"*/}
+              {/*    xmlnsXlink="http://www.w3.org/1999/xlink"></svg>*/}
+              {/*  <span className="text-danger mt-4">*/}
+              {/*    <ErrorMessage name="cardNumber" />*/}
+              {/*  </span>*/}
+              {/*</div>*/}
+              {/*<div className="col-6 mb-4">*/}
+              {/*  <label htmlFor="expirationdate">Expiration (mmyy)</label>*/}
+              {/*  <Field*/}
+              {/*    style={style.fieldHeight}*/}
+              {/*    id="expirationdate"*/}
+              {/*    name="expirationDate"*/}
+              {/*    maxLength={4}*/}
+              {/*    type="text"*/}
+              {/*    pattern="[0-9]*"*/}
+              {/*    inputMode="numeric"*/}
+              {/*  />*/}
+              {/*  /!* <DatePicker id="example-datepicker" /> *!/*/}
+              {/*  <span className="text-danger mt-4">*/}
+              {/*    <ErrorMessage name="expirationDate" />*/}
+              {/*  </span>*/}
+              {/*</div>*/}
+              {/*<div className="col-6 mb-4">*/}
+              {/*  <label htmlFor="securitycode">Security Code</label>*/}
+              {/*  <Field*/}
+              {/*    style={style.fieldHeight}*/}
+              {/*    id="securitycode"*/}
+              {/*    type="text"*/}
+              {/*    name="cardCode"*/}
+              {/*    pattern="[0-9]*"*/}
+              {/*    maxLength={3}*/}
+              {/*    inputMode="numeric"*/}
+              {/*  />*/}
+              {/*  <span className="text-danger mt-4">*/}
+              {/*    <ErrorMessage name="cardCode" />*/}
+              {/*  </span>*/}
+              {/*</div>*/}
             </div>
             {/* <h6 className='mb-3'>Billing Address</h6>
                         <div className='row mb-3'>

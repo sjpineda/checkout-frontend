@@ -119,14 +119,15 @@ function Quotes() {
           </div>
           <div className="container-lg pt-5 mt-5">
             <div className="row gx-lg-5 flex-md-reverse">
-              {/*<div className="col-md-6 col-12 mb-5">*/}
-              {/*  <h5 className="mb-4">Checkout</h5>*/}
-              {/*  <PaymentCard*/}
-              {/*    amount={quotesData?.totalCost / 2}*/}
-              {/*    name={quotesData?.finalResult?.userInfo?.name}*/}
-              {/*    phoneNumber={quotesData?.finalResult?.userInfo?.phoneNumber}*/}
-              {/*  />*/}
-              {/*</div>*/}
+              <div className="col-md-6 col-12 mb-5">
+                <h5 className="mb-4">Checkout</h5>
+                <PaymentCard
+                  amount={quotesData?.totalCost / 2}
+                  name={quotesData?.finalResult?.userInfo?.name}
+                  phoneNumber={quotesData?.finalResult?.userInfo?.phoneNumber}
+                  quoteId={id}
+                />
+              </div>
               <div className="col-md-12 col-12">
                 <div style={style.rightContent}>
                   <div style={style.container}>
