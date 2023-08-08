@@ -22,6 +22,8 @@
     "@next/bundle-analyzer": "^13.1.4",
     "@next/font": "13.1.2",
     "@next/mdx": "^13.1.4",
+    "@stripe/react-stripe-js": "^2.1.1",
+    "@stripe/stripe-js": "^2.0.0",
     "authorizenet": "^1.0.8",
     "axios": "^1.2.3",
     "bootstrap": "^5.2.3",

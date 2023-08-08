@@ -7,8 +7,19 @@ import { useRouter } from 'next/router'
 import { toast, ToastContainer } from 'react-toastify'
 import Select from 'react-select'
 // import DatePicker from 'react-bootstrap-date-picker';
+import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
 
+const stripePromise = loadStripe(
+  `pk_test_51J308XAhU6l4hvyfwh3RYZLcTxHmXuXrRwtlu032gGVnfTGsOS16sdjT79xKTZBjwtF2JOsSqAuu2UfcaLjeFSgf00TlSK6Sya`
+)
 export default function PaymentCard(props) {
+  const [clientSecret, setClientSecret] = useState('')
+  // const stripe = useStripe()
+  // const elements = useElements()
+  const options = {
+    clientSecret: 'pi_3NctCMAhU6l4hvyf17MEXEXa_secret_JuE14yqg2uxZmEPVbZWmNCvyV',
+  }
   const router = useRouter()
   const [loading, setLoading] = useState()
   const [countries, setCountries] = useState([])
@@ -28,13 +39,34 @@ export default function PaymentCard(props) {
   const handleSubmit = async values => {
     const res = await fetch(`/api/prices/${props.quoteId}`)
     const data = await res.json()
-    window.location.href = data.url
+    setClientSecret(data.client_secret)
+    await router.push(`/checkout/${data.client_secret}`)
+    console.log('data', data)
+    // window.location.href = data.url
   }
 
   if (loading) {
     return <Loading active={loading} />
   }
+  const handleSubmitForm = async event => {
+    // We don't want to let default form submission happen here,
+    // which would refresh the page.
+    event.preventDefault()
 
+    // if (!stripe || !elements) {
+    //   // Stripe.js hasn't yet loaded.
+    //   // Make sure to disable form submission until Stripe.js has loaded.
+    //   return
+    // }
+    //
+    // const { error } = await stripe.confirmPayment({
+    //   //`Elements` instance that was used to create the Payment Element
+    //   elements,
+    //   confirmParams: {
+    //     return_url: 'https://example.com/order/123/complete',
+    //   },
+    // })
+  }
   const style = {
     fieldHeight: {
       border: '0',
