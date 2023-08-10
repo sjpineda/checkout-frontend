@@ -5,7 +5,7 @@ import Loading from '@/pages/loading'
 import AuthorizeCreditCard from '@/pages/api/authorizenet/create-payment'
 import PaymentCard from '@/pages/card'
 import { toast } from 'react-toastify'
-import "../../descStyle.css"
+import '../../descStyle.css'
 function Quotes() {
   const router = useRouter()
   let { id } = router.query
@@ -92,7 +92,7 @@ function Quotes() {
   const borderCardStyle = {
     card: { border: '1px solid #ccc', borderRadius: '30px', padding: '20px', margin: '20px 0' },
     cardTitle: { fontSize: '16px', fontWeight: '700', margin: '0' },
-    desc: { fontSize: '14px',},
+    desc: { fontSize: '14px' },
   }
 
   const tableCardStyle = {
@@ -119,15 +119,15 @@ function Quotes() {
           </div>
           <div className="container-lg pt-5 mt-5">
             <div className="row gx-lg-5 flex-md-reverse">
-              <div className="col-md-6 col-12 mb-5">
-                <h5 className="mb-4">Checkout</h5>
-                <PaymentCard
-                  amount={quotesData?.totalCost / 2}
-                  name={quotesData?.finalResult?.userInfo?.name}
-                  phoneNumber={quotesData?.finalResult?.userInfo?.phoneNumber}
-                  quoteId={id}
-                />
-              </div>
+              {/*<div className="col-md-6 col-12 mb-5">*/}
+              {/*  <h5 className="mb-4">Checkout</h5>*/}
+              {/*  <PaymentCard*/}
+              {/*    amount={quotesData?.totalCost / 2}*/}
+              {/*    name={quotesData?.finalResult?.userInfo?.name}*/}
+              {/*    phoneNumber={quotesData?.finalResult?.userInfo?.phoneNumber}*/}
+              {/*    quoteId={id}*/}
+              {/*  />*/}
+              {/*</div>*/}
               <div className="col-md-12 col-12">
                 <div style={style.rightContent}>
                   <div style={style.container}>
@@ -180,14 +180,13 @@ function Quotes() {
                           <h3 style={borderCardStyle.cardTitle}>Comment from Sueep</h3>
                           <p style={borderCardStyle.desc}>
                             {/*{quotesData?.finalResult?.userInfo?.comments}*/}
-
                           </p>
                         </div>
 
                         <div className="d-grid gap-2">
                           <h3 style={borderCardStyle.cardTitle}>Address</h3>
                           <p style={borderCardStyle.desc}>
-                             {quotesData?.finalResult?.userInfo?.address}
+                            {quotesData?.finalResult?.userInfo?.address}
                           </p>
                         </div>
                         <div className="d-grid gap-2">
@@ -233,7 +232,6 @@ function Quotes() {
                             <td style={tableCardStyle.tableTd}>
                               <div className="grid gap-2">
                                 <p>Indoor Paint</p>
-
                               </div>
                             </td>
                             <td style={tableCardStyle.tableTd} className="text-right">
@@ -247,7 +245,6 @@ function Quotes() {
                             </td>
                           </tr>
                         </tbody>
-
                       </table>
                       <p className="col-lg-10 col-md-6 col-sm-10" style={borderCardStyle.desc}>
                         {/*<strong>"Note</strong> {quotesData?.finalResult?.bottomDescription}*/}
