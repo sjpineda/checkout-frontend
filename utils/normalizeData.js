@@ -1,4 +1,3 @@
-
 const propertiesDictionary = {
   email: 'email',
   phoneNumber: 'phoneNumber',
@@ -61,7 +60,7 @@ const propertiesDictionary = {
 }
 // let totalRooms = 0
 // let totalRoomSupplies = 0
-const normalizeData = async (answers) => {
+const normalizeData = async answers => {
   const roomKeys = {
     bedrooms: {
       value: 1,
@@ -288,7 +287,8 @@ const normalizeData = async (answers) => {
     }
   }
   // newObject['address'] = newObject.address?.replace(/<br>/g, '')
-   newObject['address'] +=  ` ${answers['105'].answer}`
+  const separatedAddress = answers['105'].answer.split(',')
+  newObject['address'] += ` ${separatedAddress[0]} `
   console.log('obj', newObject)
   for (let item in roomKeys) {
     if (newObject.hasOwnProperty(item)) {
