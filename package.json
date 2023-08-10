@@ -45,6 +45,7 @@
     "react-loader-spinner": "^5.3.4",
     "react-loading-overlay": "^1.0.1",
     "react-select": "^5.7.0",
+    "react-to-print": "^2.14.13",
     "react-toastify": "^9.0.8",
     "stripe": "^12.17.0",
     "tls": "^0.0.1",
