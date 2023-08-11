@@ -126,6 +126,7 @@ function Quotes() {
                     Print this out!
                   </button>
                 )}
+                bodyClass={'gap-10'}
                 content={() => componentRef.current}
               />
             </div>

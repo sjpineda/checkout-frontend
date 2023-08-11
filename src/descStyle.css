@@ -6,6 +6,28 @@
 @media screen and (max-width: 768px) {
     .flex-container {
         flex-direction: column;
-        gap: 32px;
     }
+}
+
+
+
+/*@media print {*/
+/*    html, body {*/
+/*        height: initial !important;*/
+/*        overflow: initial !important;*/
+/*        -webkit-print-color-adjust: exact;*/
+/*    }*/
+/*}*/
+
+/*@media print {*/
+/*    .page-break {*/
+/*        display: block;*/
+/*        page-break-before: auto;*/
+/*    }*/
+/*}*/
+
+@page {
+    size: auto;
+    margin-top: 32px;
+    margin-bottom: 32px;
 }
