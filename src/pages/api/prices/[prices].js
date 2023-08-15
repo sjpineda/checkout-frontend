@@ -18,7 +18,7 @@ export default async function getSession(req, res) {
       name: prices,
     })
     const paymentIntent = await createPaymentIntent(priceInCents, customer.id)
-    const user = await prisma.user.create({
+    await prisma.user.create({
       data: {
         quoteID: prices,
         stripeID: customer.id,
