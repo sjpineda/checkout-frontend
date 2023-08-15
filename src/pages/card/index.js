@@ -40,8 +40,7 @@ export default function PaymentCard(props) {
     const res = await fetch(`/api/prices/${props.quoteId}`)
     const data = await res.json()
     setClientSecret(data.client_secret)
-    await router.push(`/checkout/${data.client_secret}`)
-    console.log('data', data)
+    await router.push(`/checkout/${data.client_secret}/${data.quoteId}`)
     // window.location.href = data.url
   }
 

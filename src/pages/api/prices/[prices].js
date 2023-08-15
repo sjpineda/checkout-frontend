@@ -7,19 +7,19 @@ export default async function getSession(req, res) {
     apiVersion: '2020-08-27',
   })
 
-  const customer = await stripe.customers.list({})
-  // const customer = await stripe.customers.create({
-  //   name: prices,
-  // })
-  // const paymentIntent = await stripe.paymentIntents.create({
-  //   customer: customer.id,
-  //   setup_future_usage: 'off_session',
-  //   amount: 1099,
-  //   currency: 'usd',
-  //   payment_method_types: ['card'],
-  // })
-  // console.log('paymentIntent', paymentIntent)
-  // res.status(200).json({ client_secret: paymentIntent.client_secret })
+  // const customer = await stripe.customers.list({})
+  const customer = await stripe.customers.create({
+    name: prices,
+  })
+  const paymentIntent = await stripe.paymentIntents.create({
+    customer: customer.id,
+    setup_future_usage: 'off_session',
+    amount: 1099,
+    currency: 'usd',
+    payment_method_types: ['card'],
+  })
+  console.log('paymentIntent', paymentIntent)
+  res.status(200).json({ client_secret: paymentIntent.client_secret, quoteId: prices })
   // const products = await stripe.products.list({
   //   active: true,
   // })
@@ -52,7 +52,7 @@ export default async function getSession(req, res) {
   //   })
   //   priceId = price.id
   // }
-  //
+
   // const session = await stripe.checkout.sessions.create({
   //   mode: 'payment',
   //   success_url: 'https://example.com/success',
