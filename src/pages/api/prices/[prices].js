@@ -1,25 +1,43 @@
-import { NextResponse } from 'next/server'
 import { Stripe } from 'stripe'
-
+import prisma from '../../../lib/prisma'
+const stripe = new Stripe(process.env.STRIPE_API_KEY, {
+  apiVersion: '2020-08-27',
+})
 export default async function getSession(req, res) {
   const { prices } = req.query
-  const stripe = new Stripe(process.env.STRIPE_API_KEY, {
-    apiVersion: '2020-08-27',
+  const { priceInCents } = req.body
+  const userExists = await prisma.user.findUnique({
+    where: {
+      quoteID: prices,
+    },
   })
+  console.log('userExists', userExists)
+  if (!userExists) {
+    console.log('got here')
+    const customer = await stripe.customers.create({
+      name: prices,
+    })
+    const paymentIntent = await createPaymentIntent(priceInCents, customer.id)
+    const user = await prisma.user.create({
+      data: {
+        quoteID: prices,
+        stripeID: customer.id,
+        totalPrice: priceInCents / 100,
+        payments: priceInCents / 2,
+      },
+    })
+    res.status(200).json({ client_secret: paymentIntent.client_secret, quoteId: prices })
+  } else {
+    console.log('got here 2')
+
+    const paymentIntent = await createPaymentIntent(userExists.payments, userExists.stripeID)
+    res.status(200).json({ client_secret: paymentIntent.client_secret, quoteId: prices })
+  }
 
   // const customer = await stripe.customers.list({})
-  const customer = await stripe.customers.create({
-    name: prices,
-  })
-  const paymentIntent = await stripe.paymentIntents.create({
-    customer: customer.id,
-    setup_future_usage: 'off_session',
-    amount: 1099,
-    currency: 'usd',
-    payment_method_types: ['card'],
-  })
-  console.log('paymentIntent', paymentIntent)
-  res.status(200).json({ client_secret: paymentIntent.client_secret, quoteId: prices })
+
+  // console.log('paymentIntent', paymentIntent)
+  // res.status(200).json({ client_secret: paymentIntent.client_secret, quoteId: prices })
   // const products = await stripe.products.list({
   //   active: true,
   // })
@@ -66,4 +84,14 @@ export default async function getSession(req, res) {
   // })
   //
   // res.status(200).json({ url: session.url })
+}
+
+async function createPaymentIntent(amount, costumer) {
+  return await stripe.paymentIntents.create({
+    customer: costumer,
+    amount: amount,
+    currency: 'usd',
+    setup_future_usage: 'off_session',
+    payment_method_types: ['card'],
+  })
 }

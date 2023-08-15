@@ -155,6 +155,7 @@ const ComponentToPrint = React.forwardRef(
           <PaymentCard
             amount={quotesData?.totalCost / 2}
             name={quotesData?.finalResult?.userInfo?.name}
+            totalPriceCents={quotesData.finalPriceCents}
             phoneNumber={quotesData?.finalResult?.userInfo?.phoneNumber}
             quoteId={id}
           />

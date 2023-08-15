@@ -58,7 +58,6 @@ export default async function getCheckout(req, res) {
     totalSuppliesObject
   )
   const repairingWallsCost = repairingWalls(totalSuppliesObject.totalSuppliesWall, newObject)
-  console.log('senf wall', objectTotal.totalWalls)
   const repairingCeilingCost = repairingCeiling(
     totalRoomSupplies,
     newObject,
@@ -125,6 +124,7 @@ export default async function getCheckout(req, res) {
   console.log('finalPrice', Number(finalPrice))
   // finalPrice = ((Number(finalPrice) * 0.07).toFixed(2) + finalPrice).toLocaleString()
   finalPrice = (Number(finalPrice) * 0.07 + Number(finalPrice)).toFixed(2)
+  const finalPriceCents = finalPrice * 100
   const ccExtraCharge = finalPrice * 0.03
   const profit = finalPrice - totalOfCosts - contigency - ccExtraCharge
   const profitPercentage = (profit / finalPrice) * 100
@@ -160,6 +160,7 @@ export default async function getCheckout(req, res) {
     totalCost: finalPrice,
     contigency,
     finalResult,
+    finalPriceCents,
     // // totalCost,
     // contigency,
     // totalRoomsForSupplies,

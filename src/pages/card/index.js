@@ -37,7 +37,15 @@ export default function PaymentCard(props) {
   }, [])
 
   const handleSubmit = async values => {
-    const res = await fetch(`/api/prices/${props.quoteId}`)
+    const res = await fetch(`/api/prices/${props.quoteId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        priceInCents: props.totalPriceCents,
+      }),
+    })
     const data = await res.json()
     setClientSecret(data.client_secret)
     await router.push(`/checkout/${data.client_secret}/${data.quoteId}`)
