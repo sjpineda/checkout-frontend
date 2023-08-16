@@ -3,11 +3,14 @@ import 'react-toastify/dist/ReactToastify.css'
 import './public/css/landing.css'
 import React from 'react'
 import { ToastContainer } from 'react-toastify'
+import { CheckoutProvider } from '@/context/checkout'
 function MyApp({ Component, pageProps }) {
   return (
     <React.Fragment>
       <ToastContainer />
-      <Component {...pageProps} />
+      <CheckoutProvider>
+        <Component {...pageProps} />
+      </CheckoutProvider>
     </React.Fragment>
   )
 }

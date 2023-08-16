@@ -7,6 +7,9 @@ import PaymentCard from '@/pages/card'
 import { toast } from 'react-toastify'
 import '../../descStyle.css'
 import ReactToPrint from 'react-to-print'
+import { ModalCheckout } from '@/components/modalCheckout'
+import { createPayment } from '@/services/createPayment'
+import useCheckout from '@/context/checkout'
 function Quotes() {
   const router = useRouter()
   const componentRef = useRef(null)
@@ -107,12 +110,24 @@ function Quotes() {
     tableList: { margin: '5px 0', padding: '0 0 0 10px' },
   }
 
+  const [show, setShow] = useState(false)
+  const goToCheckout = async () => {
+    try {
+      const res = await createPayment(id, quotesData?.finalPriceCents)
+      handleShow()
+    } catch (e) {
+      toast.error('There was an error on our side, try again later')
+    }
+  }
+  const handleClose = () => setShow(false)
+  const { handleShow } = useCheckout()
   return (
     <>
       {loading ? (
         <Loading active={loading} />
       ) : (
         <>
+          <ModalCheckout show={show} handleClose={handleClose} handleShow={handleShow} />
           <div className="row fixed-top" style={style.fixedTop}>
             <div className="">
               <img src="/logo.jpeg" style={style.imageStyle} />
@@ -129,6 +144,22 @@ function Quotes() {
                 bodyClass={'gap-10'}
                 content={() => componentRef.current}
               />
+            </div>
+            <div className="col-md-6 col-12 mb-5 justify-content-center align-content-center container-lg">
+              <h5 className="mb-4">Checkout</h5>
+              <button
+                onClick={goToCheckout}
+                type="submit"
+                className="btn btnPrimary justify-content-center align-items-center w-100">
+                Go to Checkout
+              </button>
+              {/*<PaymentCard*/}
+              {/*  amount={quotesData?.totalCost / 2}*/}
+              {/*  name={quotesData?.finalResult?.userInfo?.name}*/}
+              {/*  totalPriceCents={quotesData.finalPriceCents}*/}
+              {/*  phoneNumber={quotesData?.finalResult?.userInfo?.phoneNumber}*/}
+              {/*  quoteId={id}*/}
+              {/*/>*/}
             </div>
           </div>
 
@@ -150,16 +181,6 @@ const ComponentToPrint = React.forwardRef(
   ({ style, tableCardStyle, quotesData, id, borderCardStyle, formattedStr }, ref) => (
     <div ref={ref} className="container-lg pt-5 mt-5">
       <div className="row gx-lg-5 flex-md-reverse">
-        <div className="col-md-6 col-12 mb-5">
-          <h5 className="mb-4">Checkout</h5>
-          <PaymentCard
-            amount={quotesData?.totalCost / 2}
-            name={quotesData?.finalResult?.userInfo?.name}
-            totalPriceCents={quotesData.finalPriceCents}
-            phoneNumber={quotesData?.finalResult?.userInfo?.phoneNumber}
-            quoteId={id}
-          />
-        </div>
         <div className="col-md-12 col-12">
           <div style={style.rightContent}>
             <div style={style.container}>
