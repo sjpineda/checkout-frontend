@@ -1,11 +1,12 @@
 import { PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import { useState } from 'react'
+import useCheckout from '@/context/checkout'
 
 export const CheckoutForm = ({ quoteId }) => {
   const stripe = useStripe()
   const elements = useElements()
   const [errorMessage, setErrorMessage] = useState(null)
-
+  const { priceCents } = useCheckout()
   const handleSubmit = async event => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
@@ -20,9 +21,7 @@ export const CheckoutForm = ({ quoteId }) => {
     const { error } = await stripe.confirmPayment({
       //`Elements` instance that was used to create the Payment Element
       elements,
-      confirmParams: {
-        return_url: `http://localhost:3000/quotes/${quoteId}`,
-      },
+      confirmParams: {},
     })
 
     if (error) {
@@ -40,7 +39,9 @@ export const CheckoutForm = ({ quoteId }) => {
   return (
     <form onSubmit={handleSubmit}>
       <PaymentElement />
-      <button disabled={!stripe}>Submit</button>
+      <button className="btn btnPrimary" disabled={!stripe}>
+        Pay {priceCents}
+      </button>
       {/* Show error message to your customers */}
       {errorMessage && <div>{errorMessage}</div>}
     </form>

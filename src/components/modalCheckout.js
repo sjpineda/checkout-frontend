@@ -1,6 +1,7 @@
 import { Fragment } from 'react'
 import { Modal } from 'react-bootstrap'
 import useCheckout from '@/context/checkout'
+import Checkout from '@/components/Checkout'
 
 export function ModalCheckout() {
   const { show, handleClose } = useCheckout()
@@ -11,7 +12,7 @@ export function ModalCheckout() {
           <Modal.Title>Checkout</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Are you sure you want to checkout?</p>
+          <Checkout />
         </Modal.Body>
         <Modal.Footer>
           <button className="btn btn-secondary" onClick={handleClose}>

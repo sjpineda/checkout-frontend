@@ -114,13 +114,16 @@ function Quotes() {
   const goToCheckout = async () => {
     try {
       const res = await createPayment(id, quotesData?.finalPriceCents)
+      setClientSecret(res?.clientSecret)
+      setQuoteId(id)
+      await handleIds(id, res?.clientSecret, quotesData?.totalCost / 2)
       handleShow()
     } catch (e) {
       toast.error('There was an error on our side, try again later')
     }
   }
   const handleClose = () => setShow(false)
-  const { handleShow } = useCheckout()
+  const { handleIds, handleShow, setClientSecret, setQuoteId } = useCheckout()
   return (
     <>
       {loading ? (
