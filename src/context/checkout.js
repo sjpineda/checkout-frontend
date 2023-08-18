@@ -8,10 +8,12 @@ const CheckoutContext = createContext({
   handleShow: () => {},
   handleIds: () => {},
   handleClose: () => {},
+  isPaymentSuccessful: false,
 })
 
 export function CheckoutProvider(props) {
   const [show, setShow] = useState(false)
+  const [isPaymentSuccessful, setIsPaymentSuccessful] = useState(false)
   const [quoteId, setQuoteId] = useState(null)
   const [clientSecret, setClientSecret] = useState(null)
   const [priceCents, setPriceCents] = useState(null)

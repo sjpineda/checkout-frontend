@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { Suspense, useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 import Loading from '@/pages/loading'
 import AuthorizeCreditCard from '@/pages/api/authorizenet/create-payment'
@@ -10,6 +10,7 @@ import ReactToPrint from 'react-to-print'
 import { ModalCheckout } from '@/components/modalCheckout'
 import { createPayment } from '@/services/createPayment'
 import useCheckout from '@/context/checkout'
+import Checkout from '@/components/Checkout'
 function Quotes() {
   const router = useRouter()
   const componentRef = useRef(null)
@@ -33,6 +34,7 @@ function Quotes() {
   const fetchExcelData = async () => {
     try {
       let res = await axios.get(`/api/checkout/${id}/`)
+
       // let res = await axios.get(`http://localhost:8000/submission/${id}`, {
       //   'Content-type': 'application/json; charset=UTF-8',
       //   'Content-Type': 'application/json',
@@ -130,14 +132,15 @@ function Quotes() {
         <Loading active={loading} />
       ) : (
         <>
-          <ModalCheckout show={show} handleClose={handleClose} handleShow={handleShow} />
+          {/*<ModalCheckout show={show} handleClose={handleClose} handleShow={handleShow} />*/}
+          {/*<Checkout />*/}
           <div className="row fixed-top" style={style.fixedTop}>
             <div className="">
               <img src="/logo.jpeg" style={style.imageStyle} />
             </div>
           </div>
           <div className="container-lg pt-5 mt-5">
-            <div>
+            <div className="flex-container justify-content-end">
               <ReactToPrint
                 trigger={() => (
                   <button type="submit" className="btn btnPrimary w-12">
@@ -270,13 +273,13 @@ const ComponentToPrint = React.forwardRef(
                       <th className="text-right" style={tableCardStyle.tableHead}>
                         Unit Price
                       </th>
-                      <th className="text-right" style={tableCardStyle.tableHead}>
+                      <th className="text-right totalDesktop" style={tableCardStyle.tableHead}>
                         Total
                       </th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr style={tableCardStyle.tableTr}>
+                    <tr style={tableCardStyle.tableTr} className="">
                       <td style={tableCardStyle.tableTd}>
                         <div className="grid gap-2">
                           <p>Indoor Paint</p>
@@ -288,12 +291,18 @@ const ComponentToPrint = React.forwardRef(
                       <td style={tableCardStyle.tableTd} className="text-right">
                         ${quotesData?.totalCost}
                       </td>
-                      <td style={tableCardStyle.tableTd} className="text-right">
+                      <td style={tableCardStyle.tableTd} className="text-right totalDesktop">
                         ${quotesData?.totalCost}
                       </td>
                     </tr>
                   </tbody>
                 </table>
+                <th className="text-right totalMobile" style={tableCardStyle.tableHead}>
+                  Total
+                </th>
+                <td style={tableCardStyle.tableTd} className="text-right totalMobile">
+                  ${quotesData?.totalCost}
+                </td>
                 <p className="col-lg-10 col-md-6 col-sm-10" style={borderCardStyle.desc}>
                   {/*<strong>"Note</strong> {quotesData?.finalResult?.bottomDescription}*/}
                   {formattedStr}

@@ -21,9 +21,12 @@ export const CheckoutForm = ({ quoteId }) => {
     const { error } = await stripe.confirmPayment({
       //`Elements` instance that was used to create the Payment Element
       elements,
-      confirmParams: {},
+      confirmParams: {
+        return_url: 'https://example.com/order/123/complete',
+      },
+      redirect: 'if_required',
     })
-
+    console.log(error)
     if (error) {
       // This point will only be reached if there is an immediate error when
       // confirming the payment. Show error to your customer (for example, payment

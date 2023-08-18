@@ -275,7 +275,7 @@ const normalizeData = async answers => {
         }
         address = address.replace(/,$/, '')
         newObject[propertiesDictionary[obj.name]] = address
-        newObject.addressLine = obj.answer.addr_line1
+        newObject.addressLine = obj.answer?.addr_line1
       } else {
         const dictionaryName = propertiesDictionary[obj.name]
         newObject[dictionaryName] = obj.hasOwnProperty('prettyFormat')
@@ -287,8 +287,8 @@ const normalizeData = async answers => {
     }
   }
   // newObject['address'] = newObject.address?.replace(/<br>/g, '')
-  const separatedAddress = answers['105'].answer.split(',')
-  newObject['address'] += ` ${separatedAddress[0]} `
+  const separatedAddress = answers['105'].answer?.split(',')
+  newObject['address'] += ` ${separatedAddress[0] || ''} `
   console.log('obj', newObject)
   for (let item in roomKeys) {
     if (newObject.hasOwnProperty(item)) {
