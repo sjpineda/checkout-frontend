@@ -152,13 +152,13 @@ function Quotes() {
               />
             </div>
             <div className="col-md-6 col-12 mb-5 justify-content-center align-content-center container-lg">
-              <h5 className="mb-4">Checkout</h5>
-              <button
-                onClick={goToCheckout}
-                type="submit"
-                className="btn btnPrimary justify-content-center align-items-center w-100">
-                Go to Checkout
-              </button>
+              {/*<h5 className="mb-4">Checkout</h5>*/}
+              {/*<button*/}
+              {/*  onClick={goToCheckout}*/}
+              {/*  type="submit"*/}
+              {/*  className="btn btnPrimary justify-content-center align-items-center w-100">*/}
+              {/*  Go to Checkout*/}
+              {/*</button>*/}
               {/*<PaymentCard*/}
               {/*  amount={quotesData?.totalCost / 2}*/}
               {/*  name={quotesData?.finalResult?.userInfo?.name}*/}
