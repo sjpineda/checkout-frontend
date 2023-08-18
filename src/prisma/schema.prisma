@@ -16,6 +16,7 @@ model User {
   totalPrice    Int
   payments      Int
   createdAt     DateTime  @default(now()) @map(name: "created_at")
+  firstPayment  Boolean @default(false)
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
   @@map(name: "users")
 }

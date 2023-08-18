@@ -2,6 +2,7 @@ import { createContext, useContext, useMemo, useState } from 'react'
 
 const CheckoutContext = createContext({
   show: false,
+  firstPayment: false,
   quoteId: null,
   priceCents: null,
   clientSecret: null,
@@ -17,6 +18,7 @@ export function CheckoutProvider(props) {
   const [quoteId, setQuoteId] = useState(null)
   const [clientSecret, setClientSecret] = useState(null)
   const [priceCents, setPriceCents] = useState(null)
+  const [firstPayment, setFirstPayment] = useState(false)
   const handleShow = () => {
     setShow(true)
   }
@@ -37,10 +39,22 @@ export function CheckoutProvider(props) {
       clientSecret,
       handleShow,
       handleIds,
+      firstPayment,
+      setFirstPayment,
       handleClose,
       priceCents,
     }
-  }, [show, quoteId, clientSecret, setQuoteId, handleIds, setClientSecret, priceCents])
+  }, [
+    show,
+    quoteId,
+    clientSecret,
+    setQuoteId,
+    handleIds,
+    setClientSecret,
+    priceCents,
+    firstPayment,
+    setFirstPayment,
+  ])
 
   return <CheckoutContext.Provider value={memoedValue}>{props.children}</CheckoutContext.Provider>
 }

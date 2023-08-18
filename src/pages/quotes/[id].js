@@ -13,6 +13,14 @@ import useCheckout from '@/context/checkout'
 import Checkout from '@/components/Checkout'
 function Quotes() {
   const router = useRouter()
+  const {
+    handleIds,
+    handleShow,
+    setClientSecret,
+    setQuoteId,
+    firstPayment,
+    setFirstPayment,
+  } = useCheckout()
   const componentRef = useRef(null)
   let { id } = router.query
   const [loading, setLoading] = useState(true)
@@ -41,6 +49,9 @@ function Quotes() {
       // })
       console.log('hey', res?.data.finalResult)
       setQuotesData(res?.data)
+      let userData = await axios.get(`/api/checkPayment/${id}/`)
+      console.log('userData', userData.data)
+      setFirstPayment(userData.data?.firstPayment)
       setLoading(false)
     } catch (e) {
       console.log('there was an error', e)
@@ -113,19 +124,22 @@ function Quotes() {
   }
 
   const [show, setShow] = useState(false)
+  const [processingCheckout, setProcessingCheckout] = useState(false)
   const goToCheckout = async () => {
     try {
+      setProcessingCheckout(true)
       const res = await createPayment(id, quotesData?.finalPriceCents)
       setClientSecret(res?.clientSecret)
       setQuoteId(id)
       await handleIds(id, res?.clientSecret, quotesData?.totalCost / 2)
       handleShow()
+      setProcessingCheckout(false)
     } catch (e) {
       toast.error('There was an error on our side, try again later')
     }
   }
   const handleClose = () => setShow(false)
-  const { handleIds, handleShow, setClientSecret, setQuoteId } = useCheckout()
+
   return (
     <>
       {loading ? (
@@ -133,7 +147,7 @@ function Quotes() {
       ) : (
         <>
           {/*<ModalCheckout show={show} handleClose={handleClose} handleShow={handleShow} />*/}
-          {/*<Checkout />*/}
+          <Checkout />
           <div className="row fixed-top" style={style.fixedTop}>
             <div className="">
               <img src="/logo.jpeg" style={style.imageStyle} />
@@ -152,20 +166,22 @@ function Quotes() {
               />
             </div>
             <div className="col-md-6 col-12 mb-5 justify-content-center align-content-center container-lg">
-              {/*<h5 className="mb-4">Checkout</h5>*/}
-              {/*<button*/}
-              {/*  onClick={goToCheckout}*/}
-              {/*  type="submit"*/}
-              {/*  className="btn btnPrimary justify-content-center align-items-center w-100">*/}
-              {/*  Go to Checkout*/}
-              {/*</button>*/}
-              {/*<PaymentCard*/}
-              {/*  amount={quotesData?.totalCost / 2}*/}
-              {/*  name={quotesData?.finalResult?.userInfo?.name}*/}
-              {/*  totalPriceCents={quotesData.finalPriceCents}*/}
-              {/*  phoneNumber={quotesData?.finalResult?.userInfo?.phoneNumber}*/}
-              {/*  quoteId={id}*/}
-              {/*/>*/}
+              {!firstPayment && (
+                <button
+                  onClick={goToCheckout}
+                  disabled={processingCheckout}
+                  type="submit"
+                  className="btn btnPrimary justify-content-center align-items-center w-100">
+                  {processingCheckout ? (
+                    <div className="spinner-border text-light" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                  ) : (
+                    'Pay Now'
+                  )}
+                </button>
+              )}
+              {firstPayment && <h1>Payment already made</h1>}
             </div>
           </div>
 
