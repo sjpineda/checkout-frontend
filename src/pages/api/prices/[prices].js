@@ -1,6 +1,6 @@
 import { Stripe } from 'stripe'
 import prisma from '../../../lib/prisma'
-const stripe = new Stripe(process.env.STRIPE_API_KEY, {
+const stripe = new Stripe('sk_test_51J308XAhU6l4hvyfs7d4myasppNXj9amnTpZWwzHJtYpVQGdHB0RCJdfnSl2q9rTRyLT33QmtWeKRKoLXUSzVC8800Ytxzqicm', {
   apiVersion: '2020-08-27',
 })
 export default async function getSession(req, res) {
