@@ -10,14 +10,18 @@ export function ModalCheckout() {
   const stripe = useStripe()
   const elements = useElements()
   const [errorMessage, setErrorMessage] = useState(null)
-  const [processingCheckout, setProcessingCheckout] = useState(false)
-  const [paymentSucceded, setPaymentSucceded] = useState(false)
+  const [paymentStatus, setPaymentStatus] = useState(null)
+
+  const isProcessingCheckout = paymentStatus === 'processingPayment'
+  const isPaymentSucceeded = paymentStatus === 'succeededPayment'
+  const isPaymentFailed = paymentStatus === 'failedPayment'
 
   const handleSubmit = async event => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
     event.preventDefault()
-    setProcessingCheckout(true)
+    // setProcessingCheckout(true)
+    setPaymentStatus('processingPayment')
     if (!stripe || !elements) {
       // Stripe.js hasn't yet loaded.
       // Make sure to disable form submission until Stripe.js has loaded.
@@ -38,16 +42,14 @@ export function ModalCheckout() {
       // confirming the payment. Show error to your customer (for example, payment
       // details incomplete)
       setErrorMessage(error.message)
-      setProcessingCheckout(false)
+      setPaymentStatus('failedPayment')
     } else {
       if (paymentIntent.status === 'succeeded') {
         await axios.post('/api/firstPayment/', {
           quoteId: quoteId,
         })
         setErrorMessage('Payment status: ' + paymentIntent.status)
-        setProcessingCheckout(false)
-        setFirstPayment(true)
-        setPaymentSucceded(true)
+        setPaymentStatus('succeededPayment')
         // Show a success message to your customer
         // There's a risk of the customer closing the window before callback
         // execution. Set up a webhook or plugin to listen for the
@@ -61,8 +63,6 @@ export function ModalCheckout() {
   }
 
   const handleCancel = () => {
-    setProcessingCheckout(false)
-    setPaymentSucceded(false)
     handleClose()
   }
   const PaymentSucceded = () => {
@@ -93,14 +93,14 @@ export function ModalCheckout() {
         </Modal.Body>
         <Modal.Footer>
           <button
-            disabled={processingCheckout}
+            disabled={isProcessingCheckout}
             className="btn btn-secondary"
             onClick={handleCancel}>
-            {paymentSucceded ? 'Close' : 'Cancel'}
+            {isPaymentSucceeded ? 'Close' : 'Cancel'}
           </button>
-          <button disabled={processingCheckout} className="btn btnPrimary">
+          <button disabled={isProcessingCheckout} className="btn btnPrimary">
             {/*Pay ${priceCents}*/}
-            {processingCheckout ? 'Processing...' : 'Pay $' + priceCents}
+            {isProcessingCheckout ? 'Processing...' : 'Pay $' + priceCents}
           </button>
         </Modal.Footer>
       </form>
@@ -124,14 +124,14 @@ export function ModalCheckout() {
           </Modal.Body>
           <Modal.Footer>
             <button
-              disabled={processingCheckout}
+              disabled={isProcessingCheckout}
               className="btn btn-secondary"
               onClick={handleClose}>
-              {paymentSucceded ? 'Close' : 'Cancel'}
+              {isPaymentSucceeded ? 'Close' : 'Cancel'}
             </button>
-            <button disabled={processingCheckout || paymentSucceded} className="btn btnPrimary">
+            <button disabled={isProcessingCheckout || isPaymentSucceeded} className="btn btnPrimary">
               {/*Pay ${priceCents}*/}
-              {processingCheckout ? 'Processing...' : 'Pay $' + priceCents}
+              {isProcessingCheckout ? 'Processing...' : 'Pay $' + priceCents}
             </button>
           </Modal.Footer>
         </form>{' '}
