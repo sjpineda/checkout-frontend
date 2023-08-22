@@ -66,7 +66,7 @@ function Quotes() {
       padding: '10px 25px',
       backgroundColor: 'white',
       display: 'flex',
-      justifyContent: 'center',
+      justifyContent: 'space-between',
     },
     fixedHrTop: {
       width: '99%',
@@ -149,12 +149,8 @@ function Quotes() {
           {/*<ModalCheckout show={show} handleClose={handleClose} handleShow={handleShow} />*/}
           <Checkout />
           <div className="row fixed-top" style={style.fixedTop}>
-            <div className="">
+            <div className="flex flex-row justify-content-between">
               <img src="/logo.jpeg" style={style.imageStyle} />
-            </div>
-          </div>
-          <div className="container-lg pt-5 mt-5">
-            <div className="flex-container justify-content-end">
               <ReactToPrint
                 trigger={() => (
                   <button type="submit" className="btn btnPrimary w-12">
@@ -165,24 +161,10 @@ function Quotes() {
                 content={() => componentRef.current}
               />
             </div>
-            <div className="col-md-6 col-12 mb-5 justify-content-center align-content-center container-lg">
-              {!firstPayment && (
-                <button
-                  onClick={goToCheckout}
-                  disabled={processingCheckout}
-                  type="submit"
-                  className="btn btnPrimary justify-content-center align-items-center w-100">
-                  {processingCheckout ? (
-                    <div className="spinner-border text-light" role="status">
-                      <span className="visually-hidden">Loading...</span>
-                    </div>
-                  ) : (
-                    'Pay Now'
-                  )}
-                </button>
-              )}
-              {firstPayment && <h1>Payment already made</h1>}
-            </div>
+          </div>
+          <div className="container-lg pt-5 mt-5">
+
+
           </div>
 
           <ComponentToPrint
@@ -194,6 +176,24 @@ function Quotes() {
             style={style}
             id={id}
           />
+          <div className="col-md-6 col-12 mb-5 justify-content-center align-content-center container-lg">
+            {!firstPayment && (
+              <button
+                onClick={goToCheckout}
+                disabled={processingCheckout}
+                type="submit"
+                className="btn btnPrimary justify-content-center align-items-center w-100">
+                {processingCheckout ? (
+                  <div className="spinner-border text-light" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                ) : (
+                  'Pay Now'
+                )}
+              </button>
+            )}
+            {firstPayment && <h1>Payment already made</h1>}
+          </div>
         </>
       )}
     </>
@@ -201,7 +201,7 @@ function Quotes() {
 }
 const ComponentToPrint = React.forwardRef(
   ({ style, tableCardStyle, quotesData, id, borderCardStyle, formattedStr }, ref) => (
-    <div ref={ref} className="container-lg pt-5 mt-5">
+    <div ref={ref} className="container-lg">
       <div className="row gx-lg-5 flex-md-reverse">
         <div className="col-md-12 col-12">
           <div style={style.rightContent}>
