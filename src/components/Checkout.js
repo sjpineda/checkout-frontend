@@ -14,7 +14,6 @@ import axios from 'axios'
 export default function Checkout() {
   const { clientSecret } = useCheckout()
   const [stripePromise, setStripePromise] = useState(null)
-  console.log(clientSecret, 'clientSecret')
   const options = {
     clientSecret: clientSecret,
   }
@@ -22,8 +21,6 @@ export default function Checkout() {
   const getStripePromise = async () => {
     let res = await axios.get(`/api/user`)
     const { publishableKey } = await res.data
-    console.log(res, 'res')
-    console.log(publishableKey, 'publicKey')
     setStripePromise(loadStripe(publishableKey))
   }
   useEffect(() => {
